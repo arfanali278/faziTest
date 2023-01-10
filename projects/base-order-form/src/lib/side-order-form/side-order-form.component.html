@@ -1,0 +1,148 @@
+<cdk-virtual-scroll-viewport itemSize="">
+  <form [formGroup]="form" class="form-layout">
+    <ng-content select="[headerContent]"></ng-content>
+
+    <button
+      [class.cursor-not-allowed]="!canClickPosButton"
+      #posBtn
+      (click)="setPositionQuantity()" title="Positions" class="top-position-btn"
+      [class.pos-negative]="isPositionsNegative"
+    >{{positionsSum}}</button>
+    <quantity-input #quantity formControlName="quantity" [amountButtons]="amountButtons"></quantity-input>
+    <nz-select [nzOptionHeightPx]="23" formControlName="type" class="type-select">
+      <nz-option *ngFor="let item of typeSelectOptions"
+                 [nzLabel]="item.label" [nzValue]="item.value"
+      ></nz-option>
+    </nz-select>
+    <div class="slim-amount d-none"
+         [class.d-flex]="isFormOnTop && !isExtended">
+      <span class="{{isTypeStopLimit? 'd-flex': 'd-none'}}">
+        <span class="amount-text">Amount</span>
+        <span class="amount-input">
+      <nz-input-number
+        nzMin="1"
+        formControlName="amount"
+        class="amount-number"
+      >
+      </nz-input-number>
+        </span>
+      </span>
+      <span class="{{isIceEnabled? 'd-flex': 'd-none'}} ice-button">
+        <button (click)="toggleIce()"
+                [style.color]="setting.icebergFontColor"
+                [style.background]="setting.icebergBackgroundColor"
+                nz-button class="ice-btn" [class.is-ice-active]="isIce">ICE</button>
+      </span>
+      <span [class.d-none]="!isIceAmountVisible" class="ice-amount">
+      <nz-input-number
+        formControlName="iceQuantity"
+        nzMin="1"
+      >
+      </nz-input-number>
+    </span>
+    </div>
+    <type-buttons [class.is-oco-selected]="isOcoSelected" class="type-buttons" formControlName="type"
+                  [typeButtons]="typeButtons">
+          <span [class.d-none]="!isIceAmountVisible" class="ice-amount" iceAmount>
+
+      <nz-input-number
+        formControlName="iceQuantity"
+        nzMin="1"
+      >
+      </nz-input-number>
+    </span>
+      <div [class.d-none]="!isTypeStopLimit" marketAmount class="amount">
+        <span class="amount-text">Amount</span>
+        <span class="amount-input">
+
+      <nz-input-number
+
+        formControlName="amount"
+        nzMin="1"
+        class="amount-number"
+        (focusout)="$event.stopPropagation();"
+      >
+      </nz-input-number>
+        </span>
+      </div>
+      <span ice class="{{isIceEnabled? 'd-inline-block': 'd-none'}} ice-button">
+        <button
+          [style.color]="setting.icebergFontColor"
+          [style.background]="setting.icebergBackgroundColor"
+          [class.is-ice-active]="isIce" class="ice-btn" nz-button (click)="toggleIce()">ICE</button>
+      </span>
+    </type-buttons>
+
+
+    <nz-select [nzOptionHeightPx]="23" formControlName="duration" class="type-select tif-select">
+      <nz-option *ngFor="let item of tifButtons"
+                 [nzLabel]="item.label" [nzValue]="item.value"
+      ></nz-option>
+    </nz-select>
+    <type-buttons formControlName="duration" class="tif-buttons" [typeButtons]="tifButtons"></type-buttons>
+    <div [class.d-none]="setting.formSettings.showBracket === false" class="ticks">
+      <sl-units formControlName="stopLoss"></sl-units>
+      <tp-units formControlName="takeProfit"></tp-units>
+    </div>
+    <div class="market-buttons">
+      <button class="buy-market" (click)="createBuyMarket($event)"><span class="first-letter">B</span><span
+        class="other-letters">UY</span>&nbsp;MKT
+      </button>
+      <button class="sell-market" (click)="createSellMarket($event)"><span class="first-letter">S</span><span
+        class="other-letters">ELL</span>&nbsp;MKT
+      </button>
+    </div>
+    <div class="cxl">
+      <button
+        [style.color]="setting.sellButtonsFontColor"
+        [style.background]="setting.sellButtonsBackgroundColor"
+        [class.cxl-btn-disabled]="!sellQuantity"
+        [class.d-none]="setting.formSettings.showSellButton === false"
+        (click)="emit(FormActions.CloseSellOrders)" class="cxl-btn cxl-sell" nz-button>
+        <span>
+          CXL&nbsp;
+        <span
+          class="first-letter">S</span><span class="other-letters">ELL</span>
+          </span>
+        <span *ngIf="sellQuantity" class="cxl-quantity">{{sellQuantity}}</span></button>
+      <button
+        [style.color]="setting.cancelButtonFontColor"
+        [style.background]="setting.cancelButtonBackgroundColor"
+        [class.cxl-btn-disabled]="!totalQuantity"
+        [class.d-none]="setting.formSettings.showCancelButton === false"
+        (click)="emit(FormActions.CloseOrders)" class="cxl-btn cxl-all" nz-button>
+        <span>
+           CXL&nbsp;
+        <span
+          class="first-letter">A</span><span class="other-letters">LL</span>
+          </span>
+        <span *ngIf="totalQuantity" class="cxl-quantity">{{totalQuantity}}</span></button>
+      <button [style.color]="setting.buyButtonsFontColor"
+              [class.cxl-btn-disabled]="!buyQuantity"
+              [class.d-none]="setting.formSettings.showBuyButton === false"
+              [style.background]="setting.buyButtonsBackgroundColor" (click)="emit(FormActions.CloseBuyOrders)"
+              class="cxl-btn cxl-buy" nz-button>
+        <span>
+          CXL&nbsp;
+        <span class="first-letter">B</span><span class="other-letters">UY</span></span>
+        <span *ngIf="buyQuantity" class="cxl-quantity">{{buyQuantity}}</span></button>
+    </div>
+    <div class="bottom-btns">
+      <button (click)="emit(FormActions.ClosePositions)"
+              class="close-position-button"
+              [style.background]="setting.closePositionBackgroundColor"
+              [style.color]="setting.closePositionFontColor"
+              [class.d-none]="setting.formSettings.closePositionButton === false" nz-button>
+        <span class="liquidate">liquidate</span>
+      </button>
+      <button
+        [style.color]="setting.flatButtonsFontColor"
+        [style.background]="setting.flatButtonsBackgroundColor"
+        (click)="emit(FormActions.Flatten)" [class.d-none]="!setting.formSettings.showFlattenButton" class="liquidate"
+        nz-button>
+        liq + cxl all
+      </button>
+    </div>
+  </form>
+</cdk-virtual-scroll-viewport>
+

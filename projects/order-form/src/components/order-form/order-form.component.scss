@@ -1,0 +1,347 @@
+@import "~src/scss/variables";
+
+:host {
+  height: 100%;
+
+  .order-form-wrapper {
+    background: $inputBackground;
+    padding: 8px 8px 12px;
+  }
+
+  ::ng-deep {
+    window-header > .content {
+      max-width: calc(100% - 50px) !important;
+    }
+  }
+}
+
+.order-button {
+  height: 48px;
+  border-radius: 0;
+  line-height: 1.2;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.buttons-grid {
+  display: grid;
+  margin-top: 4px;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.gap-4 {
+  grid-gap: 4px;
+}
+
+::ng-deep {
+  .order-form-overlay {
+    width: 150px;
+  }
+}
+
+.close-position, .close-position:hover, .close-position:focus {
+  background: $light2;
+  color: $text-80;
+  border-radius: 2px;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  height: 24px;
+  width: 100%;
+  text-transform: uppercase;
+}
+
+.position-button {
+  background: $primary;
+  border-radius: 2px;
+  width: auto;
+  font-size: 0.8rem;
+  color: white;
+  cursor: pointer;
+  height: 24px;
+  outline: none;
+}
+
+.pos-title {
+  font-size: 0.85rem;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 4px;
+}
+
+.main-grid {
+  column-gap: 8px;
+  row-gap: 7px;
+  grid-auto-rows: min-content;
+}
+
+.buy-button, .sell-button {
+  width: 100%;
+  height: 40px;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-active {
+  border: 1px solid $primary !important;
+  background: rgba(72, 149, 245, 0.5) !important;
+}
+
+.ice-button {
+  height: 24px;
+}
+
+.lmt-title {
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.limit-number-input {
+  width: 100%;
+  font-size: 0.8rem;
+  color: white;
+}
+
+.pos-negative {
+  background: $red;
+}
+
+:host {
+  .order-number-input {
+    font-size: 0.7rem;
+    height: 24px;
+    width: 100%;
+    background: $darkBackground;
+    border: none;
+    color: #fff;
+
+    &.ant-input-number-disabled {
+      opacity: 0.5;
+    }
+
+    ::ng-deep {
+      input {
+        height: 24px;
+      }
+    }
+  }
+
+  ::ng-deep {
+    account-select {
+      nz-select-top-control {
+        align-items: center;
+      }
+    }
+
+    nz-select {
+      height: 24px !important;
+
+      nz-select-top-control {
+        height: 24px !important;
+
+        nz-select-item {
+          line-height: 24px !important;
+        }
+      }
+    }
+
+    nz-select-top-control {
+      padding-left: 5px !important;
+      padding-right: 5px !important;
+    }
+
+    cdk-virtual-scroll-viewport, .cdk-virtual-scroll-content-wrapper {
+      height: 100%;
+    }
+  }
+}
+
+.grey-button, .dark-button {
+  height: 24px;
+  background: $light3;
+  border: 1px solid transparent;
+  padding: 0;
+  box-shadow: none;
+  font-size: 0.8rem;
+  color: white;
+  transition: all 0.3s;
+
+  &:hover, &:focus {
+    color: white;
+    box-shadow: none;
+  }
+}
+
+.dark-button {
+  background: $light;
+
+  &[disabled] {
+    opacity: 0.5;
+  }
+}
+
+.buy-button {
+  background: $primary;
+}
+
+.sell-button {
+  background: $red;
+}
+
+.window-header-divider {
+  height: 12px;
+  width: 1px;
+  margin-right: 6px;
+  margin-left: 6px;
+  background: $light2;
+}
+
+.buy-info, .sell-info {
+  font-size: 0.7rem;
+  line-height: 1rem;
+  padding: 3px 10px;
+  display: flex;
+  justify-content: space-between;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+.buy-info {
+  color: $primary;
+  background: rgba($primary, 0.1);
+}
+
+.sell-info {
+  color: $red;
+  background: rgba($red, 0.1);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.pos-cursor-not-allowed {
+  cursor: not-allowed;
+}
+
+.cursor-not-allowed {
+  cursor: not-allowed;
+  opacity: 0.5;
+
+  .cursor-pointer {
+    cursor: not-allowed;
+  }
+}
+
+.form-divider {
+  width: 100%;
+  height: 1px;
+  background: $light;
+  grid-column: 1 / span 2;
+}
+
+.position-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+}
+
+:host {
+  .count {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 57px;
+    background: rgba(36, 38, 44, 1);
+    border: 1px solid $light3;
+    border-radius: 2px;
+
+    .cursor-pointer {
+      line-height: 1;
+    }
+
+    .icon-arrow-up, .icon-arrow-down {
+      font-size: 7px;
+    }
+
+    .number {
+      border: none;
+      height: 100%;
+      box-shadow: none;
+      font-size: 1.3rem;
+      color: white;
+      width: 100%;
+
+      ::ng-deep {
+
+        .ant-input-number-handler-wrap {
+          display: none;
+        }
+
+        .ant-input-number-input-wrap {
+          height: 100%;
+
+          input {
+            height: 100%;
+            text-align: center;
+            padding: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .count-down {
+    line-height: 1.1;
+  }
+
+  nz-select {
+    color: #fff;
+  }
+
+  ::ng-deep {
+    .ant-input-number-disabled {
+      background: transparent;
+    }
+
+    quantity-input {
+      .inner-buttons {
+        display: flex;
+        justify-content: space-between;
+        /*  grid-template-columns: 1fr 1fr 1fr;
+          grid-gap: 4px;*/
+
+        & > * {
+          width: 31% !important;
+          margin: 0 !important;
+          transition: 0s !important;
+          margin-right: 4px !important;
+
+          &:nth-child(3) {
+            margin-right: 0 !important;
+          }
+
+          &:nth-child(4), &:nth-child(5) {
+            // margin-right: 0 !important;
+            width: 48% !important;
+            margin-top: 4px !important;
+            margin-right: 0px !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+

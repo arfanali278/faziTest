@@ -1,0 +1,81 @@
+<button class="add-container"
+        nz-dropdown
+        [nzTrigger]="'click'"
+        (nzVisibleChange)="handleDropdownToggle($event)"
+        [class.opened]="opened"
+        nzPlacement="topLeft"
+        [nzDropdownMenu]="menu">
+  <i title="Add Widget" class="icon-add"></i>
+</button>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu class="side-navigation">
+    <ng-container *ngFor="let item of itemsWithPresets; let index = index">
+      <li *ngIf="templates[item.component]?.length; else menuItem" nz-menu-item
+          nz-submenu
+          (nzOpenChange)="handleSubmenuOpenChange()"
+          (click)="create(item)"
+          [nzTitle]="chartSubmenuPresets"
+          class="side-navigation__item chart-submenu">
+        <ul>
+          <li nz-menu-item
+              class="side-navigation__item submenu-item"
+              *ngFor="let template of templates[item.component]"
+              (click)="create(item, template)">
+            <div class="title">
+              {{template.name}}
+            </div>
+            <div class="actions">
+              <button [title]="'Edit'" (click)="editChartTemplate(template, $event)" class="icon-edit"></button>
+              <button [title]="'Delete'" (click)="deleteChartTemplate(template, $event)"
+                      class="icon-close-window"></button>
+            </div>
+          </li>
+          <li nz-menu-divider class="divider"></li>
+          <li nz-menu-item class="side-navigation__item" (click)="create(item)">
+            New {{componentNames[item.component]}}</li>
+        </ul>
+        <ng-template #chartSubmenuPresets>
+          <i class="{{item.icon}}"></i>
+          <span>{{item.name}}</span>
+        </ng-template>
+      </li>
+      <ng-template #menuItem>
+        <li
+          nz-menu-item
+          (click)="create(item)"
+          [title]="item.name"
+          class="side-navigation__item"
+        >
+          <i class="{{item.icon}}"></i>
+
+          <span>{{item.name}}</span>
+        </li>
+      </ng-template>
+    </ng-container>
+    <li
+      nz-menu-item
+      *ngFor="let item of items"
+      (click)="create(item)"
+      [title]="item.name"
+      class="side-navigation__item"
+    >
+      <i class="{{item.icon}}"></i>
+
+      <span>{{item.name}}</span>
+    </li>
+
+    <li nz-menu-divider class="divider"></li>
+
+    <li
+      nz-menu-item
+      *ngFor="let item of bottomItems"
+      (click)="create(item)"
+      [title]="item.name"
+      class="side-navigation__item"
+    >
+      <i class="{{item.icon}}"></i>
+
+      <span>{{item.name}}</span>
+    </li>
+  </ul>
+</nz-dropdown-menu>

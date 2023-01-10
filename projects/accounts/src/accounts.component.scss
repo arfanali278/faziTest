@@ -1,0 +1,328 @@
+@import "~src/scss/variables";
+@import "~src/scss/dark.theme";
+
+table {
+  display: block;
+  width: 100%;
+}
+
+.space-beetwen {
+  display: flex;
+  justify-content: space-between;
+}
+
+.connected-status {
+  margin-left: 12px;
+}
+
+.default-label {
+  display: inline-block;
+  margin-right: 4px;
+}
+
+:host {
+  display: block;
+  height: 100%;
+
+  .broken-logo {
+    min-width: 128px;
+    opacity: 0.4;
+  }
+
+  .aggregated-quotes {
+    margin-top: 6px;
+    margin-bottom: 7px;
+  }
+
+  .add-connection {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .add-disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
+
+    &:hover, &:focus, &:focus-within {
+      color: inherit !important;
+    }
+  }
+
+  .rename {
+    border-radius: 2px;
+    margin-left: 5px;
+    font-size: 1rem;
+    line-height: 1;
+    height: 23px;
+  }
+
+  .prefix {
+    margin-right: 6px;
+  }
+
+  .connection-name {
+    width: 108px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: $text-80;
+  }
+
+  ::ng-deep {
+    nz-collapse-panel {
+      position: relative;
+
+      &:before {
+        content: '';
+        position: absolute;
+        width: 1px;
+        background: $light2;
+        z-index: 11;
+        height: calc(100% - 29px - 15px);
+        top: 29px;
+        background: #51535A;
+        left: 16px;
+      }
+    }
+
+
+    .ant-form label {
+      font-size: 0.75rem;
+    }
+
+    .custom-panel-fixed {
+      width: auto !important;
+    }
+
+    .custom-checkbox {
+      span {
+        display: flex;
+        align-items: center;
+        line-height: 1.4rem;
+      }
+    }
+
+    nz-collapse-panel {
+      &:hover {
+        .ant-collapse-extra {
+          opacity: 1;
+        }
+      }
+    }
+
+    .ant-collapse-extra {
+      position: absolute;
+      right: 6px;
+      top: 7px;
+      font-size: 10px;
+      opacity: 0;
+      transition: all 0.3s;
+    }
+
+    .broker-description {
+      font-size: 0.6rem;
+      color: $text-40;
+
+      img {
+        height: 20px;
+      }
+    }
+  }
+
+  table {
+    font-size: 0.75rem;
+  }
+
+
+  .right-text {
+    padding-left: 19px;
+  }
+
+  .custom-panel {
+    outline: none;
+  }
+
+  .custom-panel-body {
+    outline: none;
+    background: transparent !important;
+  }
+
+
+  .right-border {
+    border-right: 1px solid rgb(81, 83, 90);
+    width: 184px;
+
+    nz-collapse {
+      margin-right: 8px;
+    }
+  }
+
+  ::ng-deep {
+    .custom-collapse-ghost .ant-collapse-header {
+      padding-left: 12px !important;
+    }
+
+    /*  .link .icon-close-window {
+        font-size: 16px !important;
+      }*/
+
+    .wm-draggable {
+      color: $text-muted;
+      font-weight: 600;
+      font-size: 1rem;
+      line-height: 1.3rem;
+
+      .window-icon {
+        background: transparent;
+      }
+    }
+
+  }
+}
+
+.connect-button, .disconnect-button {
+  font-size: 0.7rem;
+  height: 22px;
+  font-weight: 600;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.is-disabled {
+    opacity: 0.9;
+    cursor: not-allowed;
+  }
+}
+
+.disconnect-button {
+  margin-top: 12px;
+}
+
+cdk-virtual-scroll-viewport {
+  height: 100%;
+}
+
+.indicator-table {
+  margin-top: 2.5px;
+}
+
+small {
+  font-size: 0.7rem;
+  line-height: 1.2;
+}
+
+.broker-action {
+  transition: all 0.3s;
+  padding-left: 8px;
+  padding-top: 4px;
+  cursor: pointer;
+  border-radius: 2px;
+  padding-bottom: 4px;
+  font-size: 0.8rem;
+  line-height: 1.2;
+  color: $text-80;
+
+  &:hover {
+    color: white;
+    background: $lighter;
+  }
+}
+
+.selectable-item {
+  outline: none;
+  justify-content: flex-end;
+  position: relative;
+
+  &.selectable-item-active .connection-name {
+    color: $titleColor;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 16px;
+    width: 7px;
+    height: 1px;
+    background: $light2;
+  }
+}
+
+.renaming.selectable-item:hover {
+  background: transparent;
+}
+
+.renaming {
+  padding-right: 0;
+}
+
+.split-connection {
+  float: right;
+
+  nz-switch {
+    margin-left: 5px;
+  }
+}
+
+.split-title {
+  font-size: 0.7rem;
+  line-height: 1.4;
+  font-weight: normal;
+  color: #D0D0D2;
+}
+
+form {
+  outline: none;
+}
+
+.split-form {
+  width: 100%;
+
+  .split-form-item {
+    width: 100%;
+
+    .split-form-title {
+      font-weight: 600;
+      font-size: 0.7rem;
+      line-height: 1.4;
+      margin-left: 6px;
+      color: #FFFFFF;
+    }
+
+    .switch-container {
+      font-weight: normal;
+      font-size: 0.7rem;
+      line-height: 1.4;
+      display: inline-flex;
+      align-items: center;
+      margin-left: 8px;
+      color: #D0D0D2;
+
+      nz-switch {
+        margin-left: 4px;
+        margin-right: 4px;
+      }
+    }
+
+    &:first-child {
+      margin-right: 6px;
+    }
+
+    &:last-child {
+      margin-left: 6px;
+    }
+  }
+}
+
+::ng-deep {
+  .broker-actions {
+    background: $light;
+    min-width: 90px;
+    padding: 4px;
+    box-shadow: 0px 0px 10px #15161d;
+  }
+}

@@ -1,0 +1,13 @@
+body.#{$themeName} {
+  :host {
+    .sell {
+      background: $fallingColor;
+      color: $buttonColor;
+    }
+
+    .buy {
+      background: $risingColor;
+      color: $buttonColor;
+    }
+  }
+}

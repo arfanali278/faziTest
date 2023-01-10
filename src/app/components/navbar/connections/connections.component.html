@@ -1,0 +1,85 @@
+<div
+  class="connections-container  d-flex justify-content-end"
+  *ngIf="items.length < maxConnections + 1"
+>
+  <div
+    class="d-flex align-items-center   connection-item"
+    (contextmenu)="connectionContextMenu($event, connectionContextMenuDropdown, connection)"
+    (click)="openAccounts(connection, index)"
+    *ngFor="let connection of items; let index = index"
+  >
+    <div class="indicator mr-2" [ngClass]="{
+      'success': connection.connected,
+      'error': connection.error,
+      'connecting': connection.loading
+    }"></div>
+    <div
+      [title]="connection.name"
+      class="text-bold text-ellipsis connection-name"
+    >{{ connection.name }}</div>
+  </div>
+</div>
+<button
+  nz-dropdown
+  nzTrigger="click"
+  nzPlacement="bottomRight"
+  (nzVisibleChange)="handleDropdownToggle($event)"
+  [nzDropdownMenu]="connectionsDropdown"
+  class="d-flex align-items-center justify-content-center navigation-button"
+  *ngIf="items.length > maxConnections"
+>
+  <i class="icon-arrow-down text-small mr-1" [class.opened]="isConnectionsDropdownOpened"></i>
+  <i [ngClass]="{
+    'text-active': hasConnectedConnections
+  }" class="icon-signal"></i>
+</button>
+<div
+  class="d-flex align-items-center justify-content-center navigation-button"
+  (click)="openAccounts()"
+  *ngIf="!items.length"
+>
+  <i
+    title="Connections"
+    class="icon-signal" [ngClass]="{
+    'text-active': hasConnectedConnections
+  }"></i>
+</div>
+<nz-dropdown-menu #connectionsDropdown="nzDropdownMenu">
+  <div class="dropdown">
+    <cdk-virtual-scroll-viewport [itemSize] [style.height.px]="connectionsListHeight">
+      <ul nz-menu #connectionsList>
+        <li
+          nz-menu-item
+          class="d-flex transition align-items-center"
+          *ngFor="let connection of items; let index = index"
+          (click)="openAccounts(connection, index)"
+          (contextmenu)="connectionContextMenu($event, connectionContextMenuDropdown, connection)"
+        >
+          <div
+            [class.dropdown-connected]="connection.connected"
+            class="pl-2 text-ellipsis dropdown-connection-item d-flex position-relative">
+            <!--  <div class="indicator menu-indicator prefix mr-2" [ngClass]="{
+                'text-success': connection.connected,
+                'text-danger': connection.error
+              }"></div>-->
+            <div [class.success]="connection.connected"
+                 [class.error]="connection.error"
+                 [class.connecting]="connection.loading"
+                 class="indicator menu-indicator"></div>
+            <div>
+              <span [title]="connection.name" class="dropdown-connection-name text-ellipsis">{{ connection.name }}</span>
+              <div class="dropdown-connection-username">{{ connection.username }}</div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </cdk-virtual-scroll-viewport>
+  </div>
+</nz-dropdown-menu>
+<nz-dropdown-menu #connectionContextMenuDropdown="nzDropdownMenu">
+  <ul class="connect-menu" nz-menu>
+    <li nz-menu-item (click)="connect()" *ngIf="!contextMenuConnection?.connected">Connect</li>
+    <li nz-menu-item (click)="disconnect()" *ngIf="contextMenuConnection?.connected">Disconnect</li>
+    <li nz-menu-item (click)="removeFromFavorites()">Remove from top menu</li>
+  </ul>
+</nz-dropdown-menu>

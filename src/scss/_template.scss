@@ -1,0 +1,114 @@
+@import "./frames";
+
+body.#{$themeName} {
+  background: $bodyBackground;
+  color: $textColor;
+  font-family: $fontFamily;
+
+  .up {
+    color: $risingColor;
+  }
+
+  .down {
+    color: $fallingColor;
+  }
+
+  .toolbar-dropdown nz-option-container {
+    background: $tabBackground !important;
+    width: 140px;
+  }
+
+  .ant-modal-close {
+    color: $textColor;
+  }
+
+  .toolbar-dropdown {
+    .ant-dropdown-menu, &.ant-select-dropdown {
+      background-color: $tabBackground;
+      color: $textColor !important;
+      padding: 0;
+      user-select: none;
+    }
+
+    .ant-select-dropdown {
+      background-color: $tabBackground !important;
+    }
+
+    .ant-dropdown-menu-item-divider, .ant-dropdown-menu-submenu-title-divider {
+      background-color: $textColorSecondary;
+    }
+  }
+
+    .ant-notification-hook-holder, .ant-notification-notice {
+    background-color: $tabBackground !important;
+  }
+
+  .ant-notification-notice-close, .ant-notification-notice-with-icon .ant-notification-notice-message {
+    color: $textColor !important;
+  }
+
+  .anticon.ant-notification-notice-icon-success {
+    color: $risingColor;
+  }
+
+  .anticon.ant-notification-notice-icon-error {
+    color: $fallingColor;
+  }
+
+  .ant-select {
+    color: $textColor;
+  }
+
+  .cdk-virtual-scroll-viewport {
+    &::-webkit-scrollbar {
+      width: 2px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $lightBackground;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: $textColorSecondary;
+    }
+  }
+
+  // .layout-container > div {
+  //   & > div:nth-child(2) ~ div {
+  //     padding: 4px;
+  //     background-color: $tabBackground!important; //FIX drop simple-window-
+
+  //     header {
+  //       background-color: $tabBackground!important;
+  //       height: 24px!important;
+  //       padding: 0px;
+  //       font-weight: 600!important;
+  //       align-items: flex-start!important;
+
+  //       span {
+  //         font-size: 14px!important;
+  //         color: $textColor!important;
+  //       }
+  //     }
+  //     section {
+  //       border-radius: 4px;
+  //       background-color: $bodyBackground!important;
+  //     }
+  //   }
+  // }
+
+  // .cdk-overlay-container {
+  //   .ant-dropdown-menu,
+  //   .ant-select-dropdown,
+  //   .ant-dropdown-menu-item {
+  //     background: $lightBackground;
+  //     color: $textColor;
+  //     font-family: $fontFamily;
+  //   }
+  // }
+}
+

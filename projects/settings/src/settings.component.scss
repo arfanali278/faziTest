@@ -1,0 +1,231 @@
+@import "themes/index";
+
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+
+  nz-radio-group {
+    & > *:not(:first-child) {
+      margin-top: 8px;
+    }
+  }
+
+  ::ng-deep {
+    window-header {
+      color: $text-60;
+      position: relative;
+
+      .window-icon {
+        margin-right: 6px !important;
+        background-color: transparent !important;
+      }
+
+      .title {
+        color: $text-60 !important;
+        font-weight: 600;
+        font-size: 1rem !important;
+      }
+
+      &:after {
+        right: 0;
+        content: '';
+        height: 102%;
+        width: 435px;
+        background: $secondary;
+        top: 0;
+        position: absolute;
+        z-index: -1;
+      }
+    }
+
+    .ant-radio-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    .ant-radio-inner {
+      width: 18px;
+      height: 18px;
+
+      &:after {
+        top: 5px;
+        left: 5px;
+        display: block;
+        width: 6px;
+        height: 6px;
+      }
+    }
+  }
+
+  .table > tbody > tr > {
+    td {
+      border-bottom: none;
+      border-top: none;
+      padding: 0;
+      padding-top: 4px;
+    }
+
+  }
+
+  .table {
+    height: 25px;
+  }
+
+  .clear-all {
+    font-size: 0.75rem;
+    padding: 0;
+    line-height: 1;
+    height: auto;
+    font-weight: 600;
+  }
+
+  .table > thead {
+    padding-bottom: 8px;
+  }
+
+  .table > thead > tr > th {
+    border-bottom: 0.5px solid $light2;
+    padding: 0;
+    padding-bottom: 6px;
+    color: $text-40;
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  ::ng-deep {
+    table .hotkey-input {
+      height: 20px;
+      background: $light;
+      font-size: 0.75rem;
+      color: $text-80;
+    }
+  }
+
+  .hotkey-name {
+    color: $text-muted;
+    font-size: 0.8rem;
+    line-height: 1;
+    height: 100%;
+    width: 50%;
+    font-weight: 600;
+  }
+
+  .hotkey-reader {
+    width: 168px;
+  }
+
+  hotkey-input {
+    display: block;
+  }
+
+  .settings {
+    height: 100%;
+    display: flex;
+    background-color: transparent;
+
+    nz-select {
+      color: white !important;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+
+      li {
+        font-size: 0.85rem;
+        color: $text-60;
+
+        &.active {
+          color: white;
+          font-weight: 600;
+        }
+      }
+    }
+
+    .tabs {
+      border-radius: 4px;
+      width: 181px;
+      min-width: 181px;
+      text-transform: capitalize;
+      padding: 16px 8px 12px;
+
+      li {
+        border-radius: 2px;
+        padding: 4px 8px;
+        margin-bottom: 1px;
+        transition: all 0.3s;
+        cursor: pointer;
+
+        &.active {
+          background: $primary;
+        }
+      }
+    }
+
+    .tab-content {
+      background-color: $inputBackground;
+      flex-grow: 1;
+      padding: 21px 16px 0;
+
+      &.sounds {
+        padding-top: 17px;
+      }
+
+      li {
+        display: flex;
+        flex-direction: column;
+        padding: 2px 0 10px;
+
+        .title {
+          margin-bottom: 6px;
+        }
+
+        ::ng-deep .select {
+          border-radius: 2px;
+          background-color: #101114;
+          color: #FFFFFF;
+          width: 180px;
+          font-weight: 400;
+
+          .ant-select-selector {
+            border: none;
+            font-size: 0.9rem;
+            height: 1.8rem;
+          }
+        }
+
+        label {
+          font-weight: normal;
+          color: #A1A2A5;
+        }
+
+        input[type="checkbox"] {
+          margin-right: 6px;
+          transform: translateY(2px);
+        }
+
+        &:not(:last-child) {
+          border-bottom: 1px solid #51535A;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+
+::ng-deep {
+  .setting-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+    background: $secondary;;
+    color: white;
+    font-weight: 400;
+  }
+
+  .setting-dropdown .ant-select-item {
+    font-weight: 400;
+    color: rgb(208, 208, 210);
+    background: rgba(56, 58, 64, 1);
+  }
+}

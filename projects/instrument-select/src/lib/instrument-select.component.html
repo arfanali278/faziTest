@@ -1,0 +1,25 @@
+<nz-select
+  [class]="className"
+  [nzOptionHeightPx]="24"
+  [nzPlaceHolder]="placeholder"
+  [nzLoading]="loading"
+  [(ngModel)]="value"
+  [nzNotFoundContent]="empty"
+  nzDropdownClassName="instrument-select"
+  [(nzOpen)]="opened"
+  #select
+  (nzOpenChange)="handleOpenChange($event, select);"
+>
+  <nz-option
+    [nzValue]="instrument.id"
+    [nzLabel]="instrument.symbol"
+    nzHide
+    *ngIf="instrument"
+  ></nz-option>
+  <nz-option
+    *ngFor="let item of items"
+    [nzValue]="item.id"
+    [nzLabel]="item.symbol"
+  ></nz-option>
+</nz-select>
+<ng-template #empty></ng-template>

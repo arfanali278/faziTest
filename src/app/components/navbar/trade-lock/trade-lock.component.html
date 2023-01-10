@@ -1,0 +1,14 @@
+<button
+  class="icon-{{lockIcons[+unlocked]}}"
+  [class.locked]="!unlocked"
+  [title]="unlocked ? 'Lock': 'Unlock'"
+
+  (click)="toggleTrading()"
+>
+</button>
+<div
+  class="{{alert?.type}}-alert"
+  *ngIf="alert?.visible"
+>
+  {{alert?.text}}
+</div>

@@ -1,0 +1,9 @@
+<data-select
+  [label]="label"
+  [value]="formControl.value"
+  [repository]="repository"
+  [disabled]="field.templateOptions.disabled"
+  [autoSelectFirst]="false"
+  (handleChange)="handleSessionChange($event)"
+  (handleUpdate)="handleSessionChange($event)"
+></data-select>

@@ -1,0 +1,93 @@
+@import "../../../../scss/dark.theme";
+@import "../themes/index";
+@import "../base-workspace";
+
+.workspaces {
+  background-color: $tabFrameColor;
+  border-radius: 2px;
+  padding: 4px;
+
+  .ant-radio-group {
+    width: 100%;
+  }
+}
+
+::ng-deep {
+  .modal-workspace {
+    .ant-modal .ant-modal-content {
+      .ant-modal-close-x {
+        height: 20px;
+        width: 20px;
+        line-height: 23px;
+        color: #fff;
+        margin-right: 3px;
+      }
+
+      .ant-modal-header .ant-modal-title {
+        font-weight: 600;
+        font-size: 0.85rem;
+        color: #fff;
+        user-select: none;
+        line-height: 1.35;
+        padding-top: 4px;
+        padding-bottom: 4px;
+      }
+    }
+
+    small {
+      user-select: none;
+      font-weight: 400;
+    }
+
+    .ant-modal .ant-modal-content {
+      .ant-modal-body {
+        width: 100%;
+        min-width: unset;
+        color: #fff;
+        font-weight: 600;
+        font-size: 0.8rem;
+        line-height: 1.2rem;
+        padding: 32px 91px;
+      }
+
+      .ant-modal-footer {
+        padding-bottom: 32px;
+
+        button {
+          font-weight: 600;
+        }
+      }
+    }
+
+    .ant-btn {
+      font-size: 0.7rem;
+    }
+  }
+}
+
+.divider {
+  margin: 0;
+}
+
+.active {
+  color: #fff;
+}
+
+.icon-union {
+  font-size: 15px;
+}
+
+.workspaces-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 4px;
+  width: 100%;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.create-btn {
+  margin: 10px 10px 6px;
+}

@@ -1,0 +1,56 @@
+<div class="frames-manager">
+  <ng-container *ngFor="let windowTuple of windowTuples">
+    <div
+      class="frame"
+      [title]="getTitle(windowTuple[0])"
+      *ngIf="windowTuple[1].size"
+    >
+      <ng-container *ngIf="windowTuple[1].size === 1">
+        <i
+          [class]="iconsMap[ windowTuple[0] ]"
+          (click)="handleClick( windowTuple[1].values()?.next()?.value )"
+        >
+        </i>
+      </ng-container>
+
+      <button nz-dropdown
+           [nzDropdownMenu]="menu"
+           nzOverlayClassName="windows-list-dropdown-menu"
+           [nzPlacement]="dropdownPlacement"
+           nzTrigger="click"
+           class="windows-list-trigger"
+           *ngIf="windowTuple[1].size > 1">
+        <i [class]="iconsMap[ windowTuple[0] ]"></i>
+
+        <span class="window-count">{{windowTuple[1].size}}</span>
+      </button>
+
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu class="windows-list">
+          <li
+            nz-menu-item
+            *ngFor="let window of windowTuple[1]"
+            class="windows-list__item"
+            (click)="handleClick(window)"
+            [class.minimized]="window.minimized"
+            (mouseover)="highlightWindowArea(window)"
+            (mouseleave)="hideWindowArea()"
+            (blur)="hideWindowArea()"
+          >
+            <div class="title">{{getComponentStateName(window, windowTuple[0])}}</div>
+            <i class="icon-close-window" (click)="closeWindow(window)"></i>
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+
+    </div>
+  </ng-container>
+</div>
+<div *ngIf="hasAnyWindow" class="vertical-divider"></div>
+<div class="highlight-area"
+     *ngIf="highlightedWindow"
+     [style.width.px]="highlightedWindow.width"
+     [style.height.px]="highlightedWindow.height"
+     [style.top.px]="windowAreaTopPosition"
+     [style.left.px]="windowAreaLeftPosition"
+></div>

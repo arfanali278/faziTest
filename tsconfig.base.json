@@ -1,0 +1,192 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "target": "es5",
+    "module": "es2020",
+    "typeRoots": [
+      "src/libs/**/*.d.ts",
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "config": [
+        "projects/config/index"
+      ],
+      "data-grid": [
+        "projects/data-grid/index"
+      ],
+      "themes": [
+        "projects/themes/index"
+      ],
+      "core": [
+        "src/app/modules/core/index"
+      ],
+      "order-form": [
+        "projects/order-form/index"
+      ],
+      "storage": [
+        "projects/storage/index"
+      ],
+      "ui": [
+        "projects/ui/index"
+      ],
+      "notifier": [
+        "projects/notifier/index"
+      ],
+      "trading-ui": [
+        "projects/trading-ui/index"
+      ],
+      "lazy-modules": [
+        "projects/lazy-modules/index"
+      ],
+      "lazy-assets": [
+        "projects/lazy-assets/index"
+      ],
+      "communication": [
+        "projects/communication/index"
+      ],
+      "fake-communication": [
+        "projects/fake-communication/index"
+      ],
+      "layout": [
+        "projects/layout/index"
+      ],
+      "search-select": [
+        "projects/search-select/index"
+      ],
+      "base-components": [
+        "projects/base-components/index"
+      ],
+      "trading": [
+        "projects/trading/index"
+      ],
+      "context-menu": [
+        "projects/context-menu/index"
+      ],
+      "scripting": [
+        "projects/scripting/index"
+      ],
+      "watchlist": [
+        "projects/watchlist/index"
+      ],
+      "settings": [
+        "projects/settings/index"
+      ],
+      "global-handler": [
+        "projects/global-handler/index"
+      ],
+      "chart": [
+        "projects/chart/index"
+      ],
+      "chart/models": [
+        "projects/chart/models"
+      ],
+      "orders": [
+        "projects/orders/index"
+      ],
+      "positions": [
+        "projects/positions/index"
+      ],
+      "accounts": [
+        "projects/accounts/index"
+      ],
+      "real-trading": [
+        "projects/real-trading/index"
+      ],
+      "accounts-manager": [
+        "projects/accounts-manager/index"
+      ],
+      "instrument-select": [
+        "projects/instrument-select/index"
+      ],
+      "instrument-dialog": [
+        "projects/instrument-dialog/index"
+      ],
+      "account-select": [
+        "projects/account-select/index"
+      ],
+      "auth": [
+        "projects/auth/index"
+      ],
+      "notification": [
+        "projects/notification/index"
+      ],
+      "window-manager": [
+        "projects/window-manager/index"
+      ],
+      "window-header": [
+        "projects/window-header/index"
+      ],
+      "dom": [
+        "projects/dom/index"
+      ],
+      "notification-list": [
+        "projects/notification-list/index"
+      ],
+      "workspace-manager": [
+        "projects/workspace-manager/index"
+      ],
+      "workspace": [
+        "projects/workspace/index"
+      ],
+      "dynamic-form": [
+        "projects/dynamic-form/index"
+      ],
+      "hotkey-input": [
+        "projects/hotkey-input/index"
+      ],
+      "base-order-form": [
+        "projects/base-order-form/index"
+      ],
+      "timezones-clock": [
+        "projects/timezones-clock/index"
+      ],
+      "session-manager": [
+        "projects/session-manager/index"
+      ],
+      "data-select": [
+        "projects/data-select/index"
+      ],
+      "time-select": [
+        "projects/time-select/index"
+      ],
+      "cache": [
+        "projects/cache/index"
+      ],
+      "market-watch": [
+        "projects/market-watch/index"
+      ],
+      "templates": [
+        "projects/templates/index"
+      ],
+      "environment": [
+        "src/environments/environment"
+      ],
+      "window-messenger": [
+        "projects/window-messenger/index"
+      ],
+      "sound": [
+        "projects/sound/index"
+      ],
+      "items-store": [
+        "projects/items-store/index"
+      ],
+      "account-info": [
+        "projects/account-info/index"
+      ]
+    }
+  }
+}

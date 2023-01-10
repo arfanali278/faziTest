@@ -1,0 +1,56 @@
+<button
+  *ngFor="let enabledTimezone of enabledTimezones"
+  nz-dropdown
+  nzTrigger="click"
+  class="clock-container"
+  (click)="timezonesDropdownTriggerButton.click()"
+>
+  <span class="zone">{{enabledTimezone.name}}</span>
+  <span class="time" *ngIf="time; else emptyTime">
+      {{ time | date: "HH:mm:ss": (enabledTimezone.offset | utc) }}
+  </span>
+</button>
+
+<button
+  #timezonesDropdownTriggerButton
+  nz-dropdown
+  nzTrigger="click"
+  class="clock-container"
+  [nzDropdownMenu]="menu"
+  [nzPlacement]="dropdownPlacement"
+  [nzClickHide]="false"
+  (nzVisibleChange)="handleToggleDropdown.emit($event)"
+>
+  <span class="zone">{{localTimezone.name}}</span>
+  <span class="time" *ngIf="time; else emptyTime">
+    {{ time | date: "HH:mm:ss" }}
+  </span>
+</button>
+
+<ng-template #emptyTime><span class="time">--:--:--</span></ng-template>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <div class="timezones-list custom-scroll">
+    <timezone-item [timezone]="localTimezone"
+                   [showCheckbox]="false"
+                   [canDelete]="false"
+                   (rename)="renameLocalTitle($event)"
+                   (reset)="resetLocalTitle()"
+                   [subtitleFontSize]="11"
+    ></timezone-item>
+
+    <div class="divider"></div>
+
+    <timezone-item *ngFor="let timezone of timezones"
+                   [timezone]="timezone"
+                   [subtitleFontSize]="timezone.enabled ? 11 : 10"
+                   [checkboxDisabled]="false"
+                   (delete)="deleteTimezone(timezone)"
+                   (reset)="resetTimezone(timezone)"
+                   (rename)="updateTimezoneName(timezone, $event)"
+                   (checkbox)="toggleTimezone(timezone, $event)"
+    ></timezone-item>
+
+    <button class="add-timezone-button" (click)="addTimezone()">Add timezone</button>
+  </div>
+</nz-dropdown-menu>

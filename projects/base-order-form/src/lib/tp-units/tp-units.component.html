@@ -1,0 +1,24 @@
+<button nz-button
+        nz-popover
+        nzPopoverTrigger="click"
+        [class.turned-off]="!form.value.takeProfit"
+        nzPopoverOverlayClassName="tick-overlay {{overlayClass}}"
+        [nzPopoverContent]="tpTicksContent"
+        class="tp-tick tick-btn">{{form.value.takeProfit ? getTitle(): 'TP: OFF'}}
+</button>
+<ng-template #tpTicksContent>
+  <form [formGroup]="form">
+    <div class="d-flex align-items-center">
+      <span class="checkbox-title">Take Profit</span>
+      <nz-switch nzSize="small" (ngModelChange)="onValueChange($event)" class="checkbox-right" formControlName="takeProfit"></nz-switch>
+    </div>
+    <div class="divider"></div>
+
+    <nz-select nzOptionHeightPx="24" formControlName="unit" class="popover-select">
+      <nz-option nzValue="points" nzLabel="Points"></nz-option>
+      <nz-option nzValue="currency" nzLabel="Currency"></nz-option>
+      <nz-option nzValue="ticks" nzLabel="Ticks"></nz-option>
+    </nz-select>
+    <nz-input-number formControlName="unitItem" class="number-input"></nz-input-number>
+  </form>
+</ng-template>

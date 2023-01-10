@@ -1,0 +1,49 @@
+<button
+  nz-dropdown
+  class="icon-union"
+  nzTrigger="click"
+  [nzPlacement]="dropdownPlacement"
+  [title]="'Workspaces'"
+  (nzVisibleChange)="handleDropdownToggle($event)"
+  [class.active]="isMenuVisible"
+  [nzClickHide]="true"
+  [nzDropdownMenu]="menu"
+>
+</button>
+<nz-dropdown-menu nzClassName="workspaces-dropdown" #menu="nzDropdownMenu">
+  <div class="workspaces">
+    <nz-radio-group [formControl]="formControl" >
+      <ul class="workspaces-list">
+        <li
+          class="workspace"
+          (click)="switchWorkspace(workspace.id)"
+          *ngFor="let workspace of workspaces"
+        >
+          <div  class="title">
+            <label class="radio-btn"
+                   (click)="switchWorkspace(workspace.id)"
+                   nz-radio [nzValue]="workspace.id">{{ workspace.name }}</label>
+          </div>
+          <div class="actions">
+            <button [title]="'Edit'" (click)="$event.stopPropagation();rename(workspace?.id)" class="icon-edit"></button>
+            <button [title]="'Delete'" (click)="$event.stopPropagation();delete(workspace?.id)" class="icon-tool-delete"></button>
+            <button title="Duplicate" (click)="$event.stopPropagation();duplicate(workspace?.id)" class="icon-duplicate"></button>
+            <button title="Share" (click)="$event.stopPropagation();share(workspace?.id)" class="icon-tool-share"></button>
+          </div>
+        </li>
+        <li
+          class="workspace cursor-pointer"
+          (click)="createWorkspace()"
+        >
+          <div class="title">
+            <i class="icon-add"></i>Create new
+          </div>
+        </li>
+      </ul>
+    </nz-radio-group>
+    <div class="text-center">
+      <div class="divider"></div>
+      <button class="create-btn" (click)="saveWorkspace()">Save Active Workspace</button>
+    </div>
+  </div>
+</nz-dropdown-menu>

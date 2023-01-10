@@ -1,0 +1,50 @@
+<button
+  class="icon-user-icon"
+  nz-dropdown
+  nzTrigger="click"
+  [nzClickHide]="false"
+  nzPlacement="bottomRight"
+  [nzDropdownMenu]="menu"
+  (nzVisibleChange)="handleToggleDropdown.emit($event)"
+  [(nzVisible)]="visible"
+>
+</button>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul *ngIf="isAuthenticated" nz-menu class="side-navigation">
+    <li
+      class="change-name"
+      nz-menu-item
+    >
+      <span [title]="userName" class=" text-ellipsis username">{{ userName }}</span>
+      <!--     <button
+             class="icon-edit"
+             (click)="changeName()"
+           ></button>-->
+    </li>
+  <!--  <li class="change-name account-info"
+        (click)="openAccountInfo()"
+        nz-menu-item>
+      <span class="text-ellipsis username">Account Info</span>
+    </li>-->
+    <li class="divider"></li>
+
+    <li
+      nz-menu-item
+      class="log-out"
+      (click)="logout()"
+    >
+      <i class="icon-log-out"></i>
+      Log out
+    </li>
+  </ul>
+  <ul *ngIf="!isAuthenticated" nz-menu class="side-navigation">
+    <li
+      class="change-name"
+      nz-menu-item
+    >
+      <a class="link" [href]="loginLink">
+        Login with Identity
+      </a>
+    </li>
+  </ul>
+</nz-dropdown-menu>

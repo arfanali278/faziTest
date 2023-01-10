@@ -1,0 +1,121 @@
+<nav class="navigation-bar">
+  <button class="position-settings-button"
+          nz-dropdown
+          (nzVisibleChange)="handleInsideDropdownToggle($event)"
+          [nzDropdownMenu]="menu"
+          [nzTrigger]="'click'">
+    <i class=" icon-settings-points"></i>
+  </button>
+
+  <nz-dropdown-menu #menu="nzDropdownMenu">
+    <ul nz-menu class="navbar-position-list">
+      <li nz-menu-item
+          *ngIf="currentNavbarPosition !== navbarPosition.Bottom"
+          (click)="changeNavbarPosition(navbarPosition.Bottom)">
+        <i class="icon-arrow-down-general"></i> Attach at the bottom
+      </li>
+      <li nz-menu-item
+          *ngIf="currentNavbarPosition !== navbarPosition.Top"
+          (click)="changeNavbarPosition(navbarPosition.Top)">
+        <i class="icon-arrow-up-general"></i> Attach at the top
+      </li>
+      <li nz-menu-item *ngIf="!isNavbarHidden"
+          (click)="changeNavbarVisibility(true)">
+        <i class="icon-hide"></i> Auto-hide
+      </li>
+      <li nz-menu-item *ngIf="isNavbarHidden"
+          (click)="changeNavbarVisibility(false)">
+        <i class="icon-show"></i> Show
+      </li>
+    </ul>
+  </nz-dropdown-menu>
+
+  <div class="navbar-manager">
+    <!-- <app-navbar-controller></app-navbar-controller> -->
+  </div>
+  <div class="logo">
+  </div>
+  <div class="create-frame">
+    <app-drag-drawer *ngIf="layout"
+                     [layout]="layout"
+                     (handleToggleDropdown)="handleInsideDropdownToggle($event)"
+    ></app-drag-drawer>
+  </div>
+
+  <app-frames-manager [dropdownPlacement]="dropdownPlacementLeftSide"></app-frames-manager>
+  <!-- <div class="search">
+    <button class="icon-search"></button>
+  </div> -->
+  <!-- <div class="spacer">&nbsp;</div>-->
+  <!-- </div> -->
+  <windows [layout]="layout" (handleToggleDropdown)="handleInsideDropdownToggle($event)"></windows>
+  <span *ngIf="windowName" class="window-name">{{windowName}}</span>
+  <app-connections [layout]="layout" (handleToggleDropdown)="handleInsideDropdownToggle($event)"></app-connections>
+
+  <div class="preferences">
+    <app-trade-lock></app-trade-lock>
+
+    <app-workspace
+      (handleToggleDropdown)="handleInsideDropdownToggle($event)"
+      [layout]="layout"
+      [dropdownPlacement]="dropdownPlacementRightSide"
+    ></app-workspace>
+
+    <button
+      [title]="'Settings'"
+      (click)="openSettings(); $event.target.blur()" class="icon-setting-gear navbar-button"
+    ></button>
+
+    <button
+      [title]="'Notifications'"
+      (click)="openNotificationsList(); $event.target.blur()" class="icon-notification  navbar-button">
+      <i *ngIf="isNewNotification" class="icon-ellipse"></i>
+    </button>
+
+    <button
+      [title]="'Save'"
+      (click)="saveWindow(); $event.target.blur()" class="icon-save navbar-button"
+    ></button>
+
+    <app-account [layout]="layout" (handleToggleDropdown)="handleInsideDropdownToggle($event)"></app-account>
+  </div>
+  <div class="time">
+    <app-clock [dropdownPlacement]="dropdownPlacementRightSide"
+               (handleToggleDropdown)="handleInsideDropdownToggle($event)"
+    ></app-clock>
+  </div>
+
+  <div class="control">
+    <button
+      class="icon-minimize-window native-minimize-button"
+            (click)="nativeMinimize()"></button>
+    <button [class.icon-full-screen-window]="!isMaximized"
+            [class.icon-maximize-window]="isMaximized"
+            class=""
+            (click)="nativeMaximize()"></button>
+    <button class="icon-close-window native-close-button" (click)="nativeClose()"></button>
+  </div>
+
+  <!-- <div nzOverlayClassName="toolbar-dropdown"
+       nzTrigger="click"
+       nz-dropdown [nzDropdownMenu]="menu" class="user-menu">
+    <img src="https://krausefx.com/assets/posts/profilePictures/FelixKrause2014.jpg"
+         alt=""
+         class="avatar">Username@name.com
+    <i class="icon-arrow-dropdown"></i>
+  </div>
+  <nz-dropdown-menu #menu="nzDropdownMenu">
+    <ul nz-menu nzSelectable>
+      <li (click)="switchTheme()"  nz-menu-item>Change theme</li>
+      <li (click)="openAccounts()" nz-menu-item>Accounts</li>
+    </ul>
+  </nz-dropdown-menu> -->
+</nav>
+<!-- <nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu nzSelectable>
+    <li nz-menu-item>Profile</li>
+    <li (click)="openSettings()" nz-menu-item>Settings</li>
+    <li nz-menu-divider></li>
+    <li nz-menu-item>Log out</li>
+  </ul>
+</nz-dropdown-menu> -->

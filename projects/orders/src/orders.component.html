@@ -1,0 +1,136 @@
+<window-header
+  (contextmenu)="dataGrid?.createComponentModal($event)"
+  (close)="closeSettings()"
+  className="widget" [window]="this">
+  <!-- <account-select></account-select> -->
+  <!-- <nz-select class="ml-1 regular"
+             [nzOptionHeightPx]="22"
+             (ngModelChange)="updateTitle()" [(ngModel)]="allTypes" nzDropdownClassName="order-dropdown-list" >
+    <nz-option *ngFor="let item of orderTypes" [nzLabel]="item" [nzValue]="item"></nz-option>
+  </nz-select>
+  <nz-select
+    [nzOptionHeightPx]="22"
+    class="ml-1 regular" (ngModelChange)="updateTitle()" [(ngModel)]="orderStatus" nzDropdownClassName="order-dropdown-list">
+    <nz-option *ngFor="let item of orderStatuses" [nzLabel]="item" [nzValue]="item"></nz-option>
+
+  </nz-select> -->
+
+</window-header>
+<div class="wrapper">
+  <loader *ngIf="loading"></loader>
+  <div class="toolbar">
+    <!-- <div (click)="selectComponent.setOpenState(true)" class="select-container">
+      <nz-select
+        #selectComponent
+        [nzShowArrow]="false"
+        [nzDropdownClassName]="'toolbar-dropdown'" [(ngModel)]="status">
+        <nz-option nzValue="Open" nzLabel="Open"></nz-option>
+        <nz-option nzValue="Close" nzLabel="Close"></nz-option>
+      </nz-select>
+      <i class="icon-arrow-dropdown"></i>
+    </div> -->
+  </div>
+  <ng-template #headerPanelTemplate>
+    <div class="d-flex align-items-center">
+      <!--      <button><i class="icon-group"></i></button>-->
+      <span [class.opened]="menuVisible"
+            class="group-container">
+        <i nz-dropdown (nzVisibleChange)="menuVisible = $event" [nzDropdownMenu]="groupMenuTemplate"
+           nzTrigger="click"
+           [class.active]="isGroupSelected" class="icon-group "></i>
+    </span>
+
+      <button nz-dropdown
+              [nzDropdownMenu]="menu"
+              [nzTrigger]="'click'"
+              (nzVisibleChange)="cancelMenuOpened = $event"
+              class="cancel-button">
+        Cancel
+        <i class="arrow" [ngClass]="{'icon-arrow-down': !cancelMenuOpened, 'icon-arrow-up': cancelMenuOpened}"></i>
+      </button>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <div class="cancel-dropdown-menu">
+          <ul nz-menu>
+            <li nz-menu-item (click)="cancelAllOrders()">All</li>
+            <li nz-menu-item (click)="cancelSelectedOrders()">Selected</li>
+            <li class="divider"></li>
+            <li nz-menu-item (click)="cancelBuyOrders()">BUY Orders</li>
+            <li nz-menu-item (click)="cancelSellOrders()">SELL Orders</li>
+            <li class="divider"></li>
+            <li nz-menu-item (click)="cancelOrdersByType(orderType.Limit)">Limits</li>
+            <li nz-menu-item (click)="cancelOrdersByType(orderType.StopLimit)">Stop Limits</li>
+            <li nz-menu-item (click)="cancelOrdersByType(orderType.StopMarket)">Stop Markets</li>
+          </ul>
+        </div>
+      </nz-dropdown-menu>
+
+      <button title="Duplicate" (click)="duplicateSelectedOrder()" [disabled]="selectedOrders.length !== 1">
+        <i class="icon-duplicate"></i>
+      </button>
+      <button (click)="openOrderForm($event)"><i class="icon-add"></i></button>
+
+      <!--      <div class="submit-buttons">-->
+      <!--        <button><i class="icon-stop"></i></button>-->
+      <!--        <button><i class="icon-play"></i></button>-->
+      <!--      </div>-->
+
+      <div class="reprices-buttons">
+        <button title="Tick up" (click)="repriceSelectedOrdersByTickSize(true)" [disabled]="!selectedOrders.length">
+          <i class="icon-arrow-up"></i>
+        </button>
+
+        <button title="Tick down" (click)="repriceSelectedOrdersByTickSize(false)" [disabled]="!selectedOrders.length">
+          <i class="icon-arrow-down"></i>
+        </button>
+      </div>
+    </div>
+  </ng-template>
+
+  <nz-tabset [nzSelectedIndex]="activeTab"
+             (contextmenu)="dataGrid?.createComponentModal($event)"
+             [nzTabBarExtraContent]="headerPanelTemplate"
+  >
+    <nz-tab nzTitle="Working" (nzClick)="changeActiveTab(tab.Working)">
+      <ng-container
+        *ngTemplateOutlet="gridTemplate; context: {$implicit:tab.Working}"></ng-container>
+    </nz-tab>
+    <nz-tab nzTitle="Filled" (nzClick)="changeActiveTab(tab.Filled)">
+      <ng-container
+        *ngTemplateOutlet="gridTemplate; context: {$implicit: tab.Filled}"></ng-container>
+    </nz-tab>
+    <nz-tab nzTitle="All" (nzClick)="changeActiveTab(tab.All)">
+      <ng-container *ngTemplateOutlet="gridTemplate; context: {$implicit:tab.All}"></ng-container>
+    </nz-tab>
+  </nz-tabset>
+</div>
+<nz-dropdown-menu #groupMenuTemplate="nzDropdownMenu">
+  <ul nz-menu class="orders-menu">
+    <li nz-menu-item>
+      <nz-radio-group [ngModel]="groupBy" (ngModelChange)="handleGroupChange($event)" class="d-flex flex-column">
+        <label nz-radio [nzValue]="groupByOptions.None">None</label>
+        <div class="divider"></div>
+        <label nz-radio [nzValue]="groupByOptions.AccountId">Account</label>
+        <label nz-radio [nzValue]="groupByOptions.InstrumentName">Instrument</label>
+      </nz-radio-group>
+    </li>
+  </ul>
+</nz-dropdown-menu>
+<ng-template let-tab #gridTemplate>
+  <data-grid #grid
+             [class.d-none]="activeTab !== tab"
+             [styles]="gridStyles"
+             [rowHeight]="24"
+             (columnUpdate)="handleUpdateColumn($event)"
+             [(contextMenuState)]="contextMenuState"
+             (contextMenuStateChange)="updateCheckboxState($event)"
+             [showHeaderPanelInContextMenu]="true"
+             [showSettingsInContextMenu]="true"
+             (settingsClicked)="openSettings($event)"
+             [items]="items"
+             [handlers]="handlers"
+             [columns]="columns"
+             [loadedPresets]="loadedPresets"
+             (savePresets)="save()"
+             (createPresets)="createPresets(Components.Orders)"
+  ></data-grid>
+</ng-template>

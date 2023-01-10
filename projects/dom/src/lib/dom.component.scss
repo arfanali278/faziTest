@@ -1,0 +1,278 @@
+$border-color: #24262c;
+$cell-background: #1b1d22;
+@import "~src/scss/variables";
+
+.clear-dropdown .ant-dropdown-menu-item:hover {
+  background: #383A40;
+}
+
+:host {
+  display: flex;
+
+  data-grid: {
+    flex-grow: 1;
+  }
+
+  window-header {
+    margin-bottom: 0px;
+    background: #24262C;
+  }
+
+  &.hide-header-panel {
+    window-header {
+      margin-bottom: 2px;
+    }
+
+    .window-header-button {
+      display: none;
+    }
+
+    .dom-layout {
+      height: calc(100% - 22px);
+    }
+  }
+
+  ::ng-deep {
+    @import "side-form";
+    account-select {
+      .custom-form-control {
+        background-color: transparent;
+      }
+    }
+
+    window-header {
+      daily-info {
+        margin-left: 7px;
+
+        .chart-data {
+          flex-wrap: wrap;
+        }
+      }
+    }
+
+    window-header {
+      align-items: flex-start !important;
+    }
+
+    .window-content {
+      margin-left: 0px !important;
+      align-items: flex-start !important;
+    }
+  }
+}
+
+.window-header-button {
+  display: flex;
+  margin-left: 4px;
+  width: 100%;
+  align-items: center;
+  padding-bottom: 3px;
+  padding-top: 2px;
+}
+
+daily-info {
+  margin-left: 4px;
+  line-height: 0.9em;
+}
+
+.form-switcher {
+  background: #101114;
+  padding: 2px;
+  border-radius: 2px;
+  width: 40px;
+  height: 20px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  .switch-item {
+    height: 16px;
+    width: 16px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 2px;
+
+    &-active {
+      background: $light;
+    }
+
+    &.slim {
+      margin-right: 2px;
+    }
+
+    &.extended {
+      margin-left: 2px;
+    }
+
+    i {
+      font-size: 10px;
+      line-height: 1;
+      color: $text-40;
+    }
+
+
+  }
+}
+
+::ng-deep {
+  .clear-dropdown {
+    background-color: #24262C;
+    box-sizing: border-box;
+    min-width: 90px;
+    padding: 5px;
+    box-shadow: 0px 0px 10px #15161D;
+    border-radius: 2px;
+
+    .ant-dropdown-menu-item {
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      line-height: 1.1rem;
+      border-radius: 2px;
+      color: $text-80;
+
+      &:hover {
+        color: white;
+        background: $inputBackground;
+      }
+    }
+  }
+}
+
+
+.grid-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+// ::ng-deep {
+//   data-grid {
+//     th,
+//     td {
+//       border: 1px solid $border-color;
+//       background-color: $cell-background;
+//     }
+
+//     // .center-price {
+//     //   position: relative;
+//     //   // border-bottom-color: #fff;
+
+//     //   // &::before {
+//     //   //   content: " ";
+//     //   //   position: absolute;
+//     //   //   // top: 0;
+//     //   //   left: 0;
+//     //   //   height: 1px;
+//     //   //   width: 100%;
+//     //   //   background-color: #fff;
+//     //   // }
+
+//     //   th,
+//     //   td {
+//     //     border-bottom-color: #fff;
+//     //   }
+//     // }
+
+//     .has-volume {
+//       /*   .price {
+//            background-color: rgb(50, 50, 50);
+//          }*/
+//     }
+//   }
+// }
+
+.window-icon {
+  color: #51535a;
+  transition: all 0.3s;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+
+  &:not(:first-child) {
+    margin-left: 6px;
+  }
+
+  &.large {
+    background: #101114;
+    display: flex;
+    padding: 4px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+  }
+
+  &.active {
+    color: $primary;
+  }
+
+  &.direction {
+    font-size: 8px;
+  }
+}
+
+.text-active {
+  color: $primary !important;
+}
+
+.icon-lock {
+  color: rgba(201, 59, 59, 1);
+}
+
+side-form {
+  width: 100px;
+  display: block;
+  height: 100%;
+}
+
+.pl-input {
+  color: white;
+  margin-top: 8px;
+  border: 1px solid #47494F;
+  border-radius: 2px;
+  padding: 1.5px;
+
+  font-size: 0.65rem;
+  padding-left: 4px;
+
+  input {
+    color: white;
+    font-size: 0.65rem;
+    text-align: right;
+  }
+}
+
+.window-icon-container {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 10px;
+  margin-left: auto;
+  justify-content: flex-end;
+}
+
+.order-wrapper {
+  overflow: hidden;
+  width: auto;
+  flex-shrink: 0;
+  background: #1b1d22;
+}
+
+.dom-layout {
+  height: calc(100% - 47px);
+  width: 100%;
+
+  &.window-left {
+    flex-direction: row;
+  }
+
+  &.window-right {
+    flex-direction: row-reverse;
+  }
+
+  &.full-screen-window {
+    flex-direction: column;
+  }
+}

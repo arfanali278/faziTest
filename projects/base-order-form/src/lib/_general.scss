@@ -1,0 +1,103 @@
+@import "~src/scss/variables";
+
+button, button:hover, button:active, button:focus-within {
+  background: #383A40;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  transition: all 0.3s;
+  color: white;
+  margin-top: 2px;
+  font-size: 0.65rem;
+  height: 24px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &[disabled] {
+    color: white;
+    border: 1px solid transparent;
+    opacity: 0.5;
+  }
+}
+
+:host-context(.full-screen-window) {
+  button, button:hover, button:active, button:focus-within {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+:host-context(.full-screen-window.slim) {
+  button, button:hover, button:active, button:focus-within {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+.black-btn, .black-btn:hover, .black-btn:active, .black-btn:focus-within {
+  background: #24262c;
+}
+
+button:hover, button.selected {
+  border: 1px solid $primary;
+}
+
+.inner-buttons {
+  display: flex;
+  flex-flow: wrap;
+
+  & > * {
+    width: 47%;
+
+    &:nth-child(odd) {
+      margin-right: 2px;
+    }
+
+    &:nth-child(even) {
+      margin-left: 2px;
+    }
+  }
+}
+
+:host-context(.full-screen-window) {
+  .inner-buttons {
+    flex-wrap: nowrap;
+    margin-top: 0;
+
+    & > * {
+      margin-top: 0;
+      min-width: 26px;
+
+      &:nth-child(odd) {
+        margin-right: 0px;
+      }
+
+      &:nth-child(even) {
+        margin-left: 0px;
+      }
+
+      &:not(:first-child) {
+        margin-left: 3px;
+      }
+    }
+  }
+}
+
+:host-context(.full-screen-window.extended) {
+  .inner-buttons {
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 4px;
+    display: grid;
+    grid-auto-flow: column;
+
+    & > * {
+      margin-top: 0;
+      min-width: auto;
+      width: 100%;
+
+      &:not(:first-child) {
+        margin-left: 0px;
+      }
+    }
+  }
+}

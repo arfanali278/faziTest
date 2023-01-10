@@ -1,0 +1,20 @@
+<nz-select [nzShowSearch]="showSearch"
+           [nzServerSearch]="showSearch" [nzPlaceHolder]="placeholder || 'Start item'"
+           [nzMode]="type"
+           [nzDisabled]="isDisabled"
+           class="custom-form-control"
+           [(ngModel)]="selectedItem"
+           [compareWith]="compareSelect.bind(this)"
+           [nzCustomTemplate]="customValueTemplate"
+           [nzShowArrow]="false"
+           [nzLoading]="loading"
+           (nzOnSearch)="onSearch($event)">
+  <nz-option *ngFor="let o of items"
+             [nzCustomContent]="customOptionTemplate"
+             [nzLabel]="displayLabel(o)" [nzValue]="o">
+    <ng-container
+      [ngTemplateOutlet]="customOptionTemplate"
+      [ngTemplateOutletContext]="{$implicit:o}"
+    ></ng-container>
+  </nz-option>
+</nz-select>

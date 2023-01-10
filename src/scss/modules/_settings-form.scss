@@ -1,0 +1,46 @@
+.settings-form {
+  height: 100%;
+  formly-form {
+    padding: 10px;
+    display: block;
+  }
+
+  .two-rows {
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 11px;
+    grid-row-gap: 6px;
+  }
+
+  .ant-form-item-control {
+    padding-left: 6px;
+    padding-right: 16px;
+  }
+
+  nz-form-item {
+    flex-direction: column;
+    margin-bottom: 0;
+
+    .ant-form-item-label {
+      text-align: start;
+      margin-bottom: 12px;
+
+      label {
+        font-weight: 600;
+        line-height: 1;
+        font-size: 0.85rem;
+        padding-left: 7px;
+        margin: 0;
+        color: $text-80;
+
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+
+  cdk-virtual-scroll-viewport {
+    height: 100%;
+  }
+}
+

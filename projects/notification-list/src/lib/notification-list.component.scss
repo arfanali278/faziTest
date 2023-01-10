@@ -1,0 +1,143 @@
+@import "../../../../src/scss/dark.theme";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: $secondary !important;
+
+  ::ng-deep {
+    window-header {
+      padding-top: 2px;
+      padding-bottom: 2px;
+
+      .content {
+        max-width: calc(100% - 12px) !important;
+        margin-right: 0px !important;
+      }
+    }
+
+    .window-icon {
+      margin-right: 6px !important;
+    }
+  }
+}
+
+.date {
+  color: $text-40;
+  font-size: 0.65rem;
+  text-align: center;
+  line-height: 1;
+  margin-top: 19px;
+  margin-left: 16px;
+  margin-right: 16px;
+  position: relative;
+
+  &:after, &:before {
+    height: 1px;
+    position: absolute;
+    top: 50%;
+    background: $light2;
+    width: calc(50% - 42px);
+    content: '';
+    transform: translateY(-50%);
+  }
+
+  &:before {
+    left: 0;
+  }
+
+  &:after {
+    right: 0;
+  }
+}
+
+.list-container {
+  flex-grow: 1;
+  background-color: #1B1D22;
+}
+
+cdk-virtual-scroll-viewport {
+  height: 100%;
+}
+
+.notification {
+  position: relative;
+  margin: 13px 16px 0;
+}
+
+.notication-connected, .notication-disconnected, .notication-default, .notication-success, .notifcation-error {
+  mask-size: 100%;
+  mask-repeat: no-repeat;
+  height: 14px;
+  width: 14px;
+  display: block;
+}
+
+.notication-connected, .notication-disconnected {
+  mask-image: url('~src/assets/img/svg/notication-connected.svg');
+  background: $success;
+}
+
+.notication-disconnected {
+  background: $red;
+}
+
+.notifcation-error {
+  mask-image: url('~src/assets/img/svg/notifcation-error.svg');
+  background: $red;
+}
+
+.notication-default {
+  mask-image: url('~src/assets/img/svg/notication-default.svg');
+  background: $text-80;
+}
+
+.notication-success {
+  mask-image: url('~src/assets/img/svg/notication-default.svg');
+  background: $success;
+}
+
+.header {
+  display: flex;
+  color: #737377;
+  align-items: center;
+
+  .icon {
+    margin-right: 6px;
+
+    [class^="icon-"], [class*=" icon-"] {
+      font-size: 14px;
+
+    }
+  }
+
+  .title {
+    flex-grow: 1;
+    color: white;
+    font-size: 0.85rem;
+  }
+}
+
+.notification {
+  .body {
+    font-size: 0.75rem;
+    color: $text-60;
+    white-space: pre-line;
+  }
+
+  .timestamp {
+    font-size: 0.75rem;
+  }
+
+  &.is-read {
+    opacity: 0.5;
+  }
+}
+
+.no-notifications {
+  padding-top: 60px;
+  font-size: 0.75rem;
+  color: $text-60;
+  text-align: center;
+}

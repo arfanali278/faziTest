@@ -1,0 +1,122 @@
+<window-header marginClass="" className="widget" [window]="this">
+  <instrument-select
+    className=""
+    [instrument]="instrument"
+    (instrumentChange)="instrument = $event"
+    [account]="select.account"
+  ></instrument-select>
+  <div class="window-header-divider"></div>
+  <account-select [account]="account" (accountChange)="handleAccountChange($event)" #select></account-select>
+</window-header>
+<cdk-virtual-scroll-viewport itemSize="">
+  <form class="h-100 order-form-wrapper main-grid grid" [formGroup]="form">
+    <div class="position-container">
+      <span class="pos-title">Pos</span>
+      <button
+        [class.pos-cursor-not-allowed]="!canClickPosButton"
+        (click)="setPositionQuantity()" class="position-button"
+        [class.pos-negative]="isPositionsNegative">{{positionsSum}}</button>
+    </div>
+    <div>
+      <button (click)="closePositions()" class="close-position" nz-button>Close Position</button>
+    </div>
+    <div>
+      <quantity-input [ngModel]="quantity"
+                      [allowEdit]="true"
+                      [ngModelOptions]="{standalone: true}"
+                      (ngModelChange)="updateQuantity($event)" [amountButtons]="amountButtons"></quantity-input>
+    </div>
+    <div>
+      <div class="grid gap-4">
+        <nz-select (ngModelChange)="onTypeUpdated()" formControlName="type" [nzOptionHeightPx]="23">
+          <nz-option *ngFor="let item of orderTypes" [nzDisabled]="item.disabled" [nzValue]="item.value" [nzLabel]="item.label">
+          </nz-option>
+        </nz-select>
+        <nz-select formControlName="duration" [nzOptionHeightPx]="23">
+          <nz-option *ngFor="let item of orderDurations" [nzValue]="item" [nzLabel]="item">
+          </nz-option>
+        </nz-select>
+      </div>
+      <div class="buttons-grid gap-4">
+        <button nz-button (click)="createOco()" (contextmenu)="cancelOco()" class="dark-button {{isOco ? 'button-active': ''}}">OCO</button>
+        <button [disabled]="!isIceEnabled" (click)="toggleIce()"
+                class="dark-button {{isIce && isIceEnabled ? 'button-active': ''}}" nz-button>ICE
+        </button>
+        <nz-input-number
+          class="order-number-input w-100"
+          formControlName="iceQuantity"
+        >
+        </nz-input-number>
+      </div>
+    </div>
+    <div class="form-divider"></div>
+    <sl-units overlayClass="order-form-overlay" formControlName="stopLoss"></sl-units>
+    <tp-units overlayClass="order-form-overlay" formControlName="takeProfit"></tp-units>
+    <div class="form-divider"></div>
+
+    <div [class.d-none]="!isStopLimit" class="lmt-title">LMT</div>
+    <nz-input-number
+      [class.d-none]="!isStopLimit"
+      class="limit-number-input"
+      [nzMin]="0"
+      [nzStep]="instrument?.tickSize"
+      #limitPriceNode
+      [nzFormatter]="priceFormatter"
+      [ngModelOptions]="{standalone: true}"
+      (nzBlur)="handleLimitPriceChange()"
+      [(ngModel)]="limitPrice"
+    ></nz-input-number>
+    <div *ngIf="isStopLimit" class="form-divider"></div>
+
+    <div class="count">
+      <div (click)="incrementQuantity()" class="cursor-pointer">
+        <i class="icon-arrow-up"></i>
+      </div>
+      <nz-input-number
+        [nzInputMode]="'numeric'"
+        [nzMin]="1" formControlName="quantity" class="number"></nz-input-number>
+      <div (click)="decrementQuantity()" class="cursor-pointer count-down">
+        <i class="icon-arrow-down"></i>
+      </div>
+    </div>
+    <div [class.cursor-not-allowed]="shouldDisablePrice" class="count">
+      <div (click)="increasePrice()" class="cursor-pointer">
+        <i class="icon-arrow-up"></i>
+      </div>
+      <nz-input-number [ngModelOptions]="{standalone: true}"
+                       [nzMin]="0"
+                       #priceNode
+                       [nzDisabled]="shouldDisablePrice"
+                       (nzBlur)="handlePriceChange()"
+                       [nzFormatter]="priceFormatter"
+                       [(ngModel)]="price"
+                       class="number"
+      ></nz-input-number>
+      <div (click)="decreasePrice()" class="cursor-pointer count-down">
+        <i class="icon-arrow-down"></i>
+      </div>
+
+    </div>
+    <div class="trade-button">
+      <div class="buy-info">
+        <span>{{bidVolume | nullCoalescing}}</span>
+        <span>{{bidPrice | nullCoalescing }}</span>
+      </div>
+      <button
+        (click)="submit(OrderSide.Buy)"
+        class="buy-button" nz-button>BUY
+      </button>
+    </div>
+    <div class="trade-button">
+      <div class="sell-info">
+        <span>{{askPrice | nullCoalescing}}</span>
+        <span>{{askVolume | nullCoalescing}}</span>
+      </div>
+      <button
+        (click)="submit(OrderSide.Sell)"
+        nzType="danger"
+        class="sell-button" nz-button>SELL
+      </button>
+    </div>
+  </form>
+</cdk-virtual-scroll-viewport>

@@ -1,0 +1,93 @@
+@import "~src/scss/variables";
+@import "~src/scss/dark.theme";
+@import "../scroll";
+
+:host {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background: $light;
+  transition: background 0.3s;
+}
+
+.timezones-list {
+  max-width: 170px;
+  padding: 4px 4px 10px;
+  background-color: $tabFrameColor;
+  border-radius: 2px;
+  box-shadow: 0 0 10px #15161D;
+}
+
+.clock-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  user-select: none;
+  position: relative;
+  margin: 0 15px;
+  background: transparent;
+  padding: 0;
+  transition: 0.3s color;
+
+  &:hover {
+    color: #fff;
+
+    .time, .zone {
+      color: #fff;
+    }
+  }
+
+  &:not(&:last-child) {
+    &:after {
+      position: absolute;
+      right: -15px;
+      content: "";
+      width: 1px;
+      height: 28px;
+      background: $lightBackground;
+    }
+  }
+
+  .zone {
+    max-width: 130px;
+    color: $text-60;
+    white-space: nowrap;
+    transition: 0.3s color;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .time {
+    color: $text-80;
+    transition: 0.3s color;
+    margin-left: 5px;
+  }
+}
+
+.add-timezone-button {
+  color: $textColor;
+  background-color: $bodyBackground !important;
+  border: 1px solid $risingColor;
+  border-radius: 2px;
+  width: 100%;
+  min-width: 135px;
+  user-select: none;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 10px;
+  margin-top: 6px;
+  transition: opacity .2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.divider {
+  margin: 5px;
+}

@@ -1,0 +1,77 @@
+@import "../ticks";
+@import "../general";
+
+
+::ng-deep {
+  .tick-overlay {
+    nz-input-number {
+      height: 20px;
+      color: #FFFFFF;
+      width: auto;
+      font-size: 0.7rem;
+      background: $darkBackground;
+      border: none;
+
+      .ant-input-number-input {
+        height: 20px;
+      }
+    }
+
+    .ant-input-number-disabled {
+      color: $text-40;
+    }
+
+    .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+      background: $darkBackground;
+    }
+  }
+}
+
+.amount-container {
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 5px;
+  align-items: center;
+}
+
+.sl-tick, .sl-tick:focus, .sl-tick:hover, .sl-tick:focus-within {
+  background: rgba(201, 59, 59, 0.2);
+  border: 1px solid #C93B3B;
+  transition: all 0.3s;
+}
+
+.sl-tick:focus-within {
+  opacity: 0.5;
+}
+
+
+.amount {
+  font-size: 0.7rem;
+}
+
+.stp-buttons {
+  margin-bottom: 5px;
+  justify-content: space-around;
+}
+
+.popover-btn, .popover-btn:hover, .popover-btn:focus, .popover-btn:focus-within {
+  width: 59px;
+  font-size: 0.8rem;
+  padding: 0;
+  transition: all 0.3s;
+  background: #1B1D22;
+  // border: 1px solid transparent !important;
+
+  &:not(:first-child) {
+    margin-left: 6px;
+  }
+}
+
+.btn-active:not(:disabled) {
+  border: 1px solid $primary !important;
+}
+
+:host-context(.full-screen-window) {
+  .sl-tick {
+    margin-top: 0;
+  }
+}

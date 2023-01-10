@@ -1,0 +1,151 @@
+@import "themes/index";
+
+button {
+  padding: 1px 12px;
+  margin: 0;
+  height: 100%;
+  background-color: $tabFrameColor;
+  position: relative;
+
+  & > .icon-ellipse {
+    font-size: .5em;
+    color: $fallingColor;
+    position: absolute;
+    left: 50%;
+    top: 2%;
+  }
+
+}
+
+::ng-deep {
+  .side-navigation {
+    &__item {
+      display: list-item;
+    }
+
+    .chart-submenu {
+      padding: 0 !important;
+
+      .ant-dropdown-menu-submenu-title {
+        width: 100%;
+        padding: 3px 5px;
+        text-align: left;
+        font-size: 11px;
+      }
+
+      .ant-dropdown-menu-submenu-arrow {
+        display: none;
+      }
+    }
+  }
+}
+
+.add-container {
+  transition: all 0.3s;
+
+  &:hover {
+    background: $inputBackground;
+
+    .icon-add {
+      color: white;
+    }
+  }
+
+  &.opened {
+    .icon-add {
+      color: $primary;
+    }
+  }
+}
+
+.icon-add {
+  font-size: 15px;
+  transition: color 0.3s;
+}
+
+.side-navigation {
+  position: relative;
+  width: auto;
+  min-width: 140px;
+  padding: 3px;
+  border-radius: 2px;
+  z-index: 41;
+  transition: transform 0.3s ease-out;
+  background-color: $tabFrameColor !important;
+
+  &__item {
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 3px 5px;
+    font-size: 11px;
+    text-align: center;
+    line-height: 16px;
+    border-radius: 2px;
+    background-color: $tabFrameColor !important;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &:hover {
+      color: $titleColor !important;
+      background-color: $light3 !important;
+    }
+
+    [class*=icon-] {
+      font-size: 12px;
+      margin-right: 10px;
+    }
+  }
+}
+
+.divider {
+  background-color: $light2;
+  margin: 5px;
+}
+
+.submenu-item {
+  position: relative;
+  height: 22px;
+  width: 150px;
+  overflow: hidden;
+
+  .title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .actions {
+    position: absolute;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    padding-left: 10px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    button {
+      width: auto;
+      padding: 0;
+      margin-right: 4px;
+      background-color: transparent;
+      font-size: 0.8rem;
+      font-weight: 400;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+
+  &:hover {
+    .actions {
+      opacity: 1;
+      background: linear-gradient(270deg, #383A40 77.08%, rgba(56, 58, 64, 0) 100%);
+    }
+  }
+}

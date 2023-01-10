@@ -1,0 +1,158 @@
+@import "~src/scss/variables";
+
+$horizontal-padding: 8px;
+:host {
+  display: flex;
+  //flex: 1 1 auto;
+  margin-left: auto;
+  justify-content: flex-end;
+  position: relative;
+  height: 100%;
+  padding: 0 $horizontal-padding;
+
+}
+
+::ng-deep {
+  .connect-menu {
+    .is-connecting {
+      cursor: not-allowed;
+      opacity: 0.9;
+    }
+  }
+}
+
+.dropdown-connection-name, .connection-name {
+  max-width: 170px;
+  min-width: 60px;
+  display: block;
+  user-select: none;
+}
+
+.dropdown-connection-name {
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+.dropdown-connection-username {
+  max-width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.8rem;
+  // line-height: 1.15;
+  color: $text-60;
+  transition: all 0.3s;
+  user-select: none;
+}
+
+.transition {
+  transition: all 0.3s;
+}
+
+.dropdown-connection-item {
+  color: white;
+  padding-bottom: 2px;
+
+  &:hover {
+    .dropdown-connection-username {
+      color: white;
+    }
+  }
+}
+
+.dropdown-connected {
+  .dropdown-connection-name {
+    color: white;
+  }
+}
+
+/*.absolute-overlay{
+  left: unset;
+}*/
+.menu-indicator {
+  height: 8px;
+  width: 8px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-right: 4px;
+  margin-top: 6px;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -2px 0 0 -2px;
+    height: 4px;
+    width: 4px;
+    border-radius: 50%;
+  }
+}
+
+.custom-panel-fixed {
+  width: auto !important;
+}
+
+.connections-container {
+  margin-right: -#{$horizontal-padding};
+}
+
+.navigation-button {
+  transition: all .3s;
+  height: 36px;
+  width: 36px;
+  cursor: pointer;
+  background-color: transparent;
+
+  &:hover {
+    background-color: $inputBackground;
+    color: white;
+  }
+}
+
+.connection-item {
+  padding-left: 10px;
+  padding-right: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: $text-80;
+  transition: all 0.3s;
+
+  &:hover {
+    background: $inputBackground;
+    color: white;
+  }
+}
+
+.icon-signal {
+  font-size: 15px;
+}
+
+.text-active {
+  color: $primary;
+}
+
+.icon-arrow-down {
+  transition: all .2s ease;
+
+  &.opened {
+    transform: rotateZ(180deg);
+  }
+}
+
+:host-context(body.navbarBottom) .icon-arrow-down {
+  transform: rotateZ(180deg);
+
+  &.opened {
+    transform: rotateZ(0);
+  }
+}
+
+.dropdown {
+  height: auto;
+}

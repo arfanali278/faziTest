@@ -1,0 +1,18 @@
+<loader *ngIf="loading"></loader>
+
+<window-header (contextmenu)="grid.createComponentModal($event)" className="widget" [window]="this">
+</window-header>
+
+<data-grid
+  [items]="items"
+  [handlers]="handlers"
+  [columns]="columns"
+  [class.loading-block]="isLoading"
+  [class.block-pointer]="isLoading"
+  [loadedPresets]="loadedPresets"
+  (savePresets)="save()"
+  (createPresets)="createPresets(Components.Watchlist)"
+  #grid>
+>
+  <instrument-select className="watchlist-instrument-select" (instrumentChange)='selectInstrument($event)'></instrument-select>
+</data-grid>

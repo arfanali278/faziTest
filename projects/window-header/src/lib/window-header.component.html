@@ -1,0 +1,26 @@
+<div class="content d-flex align-items-center w-100 wm-draggable {{className}}">
+  <div class="wm-draggable" [class.window-icon]="window.getTabIcon()">
+    <i [class]="window.getTabIcon()"></i>
+  </div>
+  <div class="title wm-draggable">{{ window.getTabTitle() }}</div>
+  <div class="flex-fill d-flex window-content align-items-center {{marginClass}} wm-draggable">
+    <ng-content></ng-content>
+  </div>
+</div>
+
+<div>
+  <ng-container *ngIf="!hideInstruments()">
+<!--  <span *ngIf="window.shouldOpenInNewWindow()" (click)="popup()" class="link popup-link">
+    <i class="icon-popup"></i>
+  </span>-->
+    <span class="link" *ngIf="window.minimizable()" (click)="window.minimize()">
+    <i class="icon-minimize-window"></i>
+  </span>
+    <span class="link" *ngIf="window.maximizable()" (click)="window.maximize()">
+    <i [class]="window.isMaximized() ? 'icon-maximize-window' : 'icon-full-screen-window'"></i>
+  </span>
+  </ng-container>
+  <span class="link" *ngIf="(!hideInstruments() || window.closableIfPopup())" (click)="onClose()">
+    <i class="icon-close-window"></i>
+  </span>
+</div>

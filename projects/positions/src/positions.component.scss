@@ -1,0 +1,161 @@
+@import "themes/index";
+
+$header-height: 21px;
+$footer-height: 28px;
+
+:host {
+  display: block;
+  height: 100%;
+  overflow: auto;
+  width: 100%;
+  // padding: 10px;
+
+
+  ::ng-deep {
+    window-header {
+      .title {
+        color: #fff !important;
+      }
+    }
+    data-grid {
+      height: calc(100% - #{$header-height} - #{$footer-height});
+    }
+  }
+}
+
+.tabs {
+  display: flex;
+  margin-bottom: 15px;
+
+  .tab {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 4px;
+
+    i {
+      font-size: 10px;
+    }
+
+    &:not(:first-child) {
+      margin-left: 10px;
+    }
+
+    .tab-icon {
+      margin-right: 8px;
+    }
+  }
+}
+
+.bottom-info {
+  display: flex;
+  height: $footer-height;
+  font-size: 0.8rem;
+  line-height: 1.1rem;
+  align-items: center;
+  color: $text-80;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.bottom-title {
+  text-transform: uppercase;
+  margin-left: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:not(:first-child) {
+    margin-left: 14px;
+  }
+}
+
+.bottom-data {
+  height: 100%;
+  min-width: 80px;
+  background: rgba($primary, 0.8);
+  margin-left: 6px;
+  border-radius: 2px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-left: 6px;
+  padding-right: 6px;
+
+  &.empty {
+    background: $inputBackground
+  }
+
+  &.negative {
+    background: $red;
+  }
+}
+
+.group-container {
+  background-color: $darkBackground;
+  width: 24px;
+  display: flex;
+  height: 18px;
+  justify-content: center;
+  align-items: center;
+  margin-left: 12px;
+  cursor: pointer;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  transition: all 0.3s;
+
+  i {
+
+    font-size: 11px;
+    line-height: 1;
+    transition: color 0.3s;
+
+    &.active {
+      color: $primary;
+    }
+  }
+
+  &.opened {
+    border: 1px solid $primary;
+  }
+}
+
+::ng-deep {
+  .position-menu {
+    background: #24262C;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 2px;
+    box-shadow: 0px 0px 10px 0px rgba(21, 22, 29, 1);
+
+    .ant-dropdown-menu-item:hover, .ant-dropdown-menu-submenu-title:hover {
+      background-color: transparent;
+    }
+
+    .divider {
+      margin: 6px 0;
+    }
+
+    .ant-radio-wrapper {
+      font-size: 0.75rem;
+      font-weight: 400;
+      margin-top: 6px;
+      line-height: 1.2rem;
+      color: $text-80;
+    }
+  }
+}
+
+.select.ant-select {
+  height: 20px;
+  width: 80px;
+  font-size: 0.8rem;
+  background: transparent;
+  margin-left: 8px;
+}
+
+.ant-select {
+  width: 140px;
+}
+

@@ -1,0 +1,263 @@
+@import "themes/index";
+
+$headerHeight: 16px;
+$selectHeightContainer: 32px;
+$selectMarginBottom: 15px;
+
+:host {
+  display: block !important;
+  height: 100%;
+  overflow: auto;
+
+  width: 100%;
+
+  ::ng-deep {
+    data-grid {
+      height: calc(100% - #{$headerHeight});
+    }
+    window-header {
+      .title {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #fff !important;
+
+      }
+    }
+
+    .regular {
+      nz-select-item {
+        font-weight: 400;
+      }
+    }
+
+    .ant-tabs-bar {
+      margin-left: 8px;
+      margin-bottom: 6px;
+      border: none;
+    }
+
+    .ant-tabs-nav .ant-tabs-tab {
+      margin-right: 3px;
+      padding: 4px 10px;
+      font-size: 0.8rem;
+      line-height: 1.2rem;
+    }
+
+    .ant-tabs-ink-bar {
+      background: $primary;
+      height: 1px;
+    }
+
+    .ant-tabs-nav .ant-tabs-tab-active {
+      color: $primary;
+    }
+
+    .wrapper {
+      position: relative;
+      height: 100%;
+      text-align: right;
+    }
+
+    nz-tabs-nav {
+      display: block;
+    }
+
+    .ant-tabs-top-content {
+      height: calc(100% - 34px);
+    }
+
+    .ant-tabs-extra-content {
+      line-height: 22px;
+      float: left !important;
+      padding-top: 4px;
+    }
+  }
+
+  &.hide-header ::ng-deep {
+    nz-tabs-nav {
+      display: none;
+    }
+
+    .ant-tabs-top-content {
+      height: 100%;
+    }
+  }
+
+
+  .select-container {
+    position: relative;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-left: 10px;
+    margin-bottom: $selectMarginBottom;
+    height: $selectHeightContainer;
+    max-width: 140px;
+    min-width: 100px;
+  }
+
+  .icon-arrow-dropdown {
+    position: absolute;
+    font-size: 4px;
+    cursor: pointer;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+  }
+
+  .account {
+    display: inline-block;
+  }
+
+  .toolbar {
+    display: flex;
+  }
+}
+
+nz-tabset {
+  height: 100%;
+}
+
+.group-container {
+  background-color: $darkBackground;
+  width: 24px;
+  display: flex;
+  height: 18px;
+  justify-content: center;
+  align-items: center;
+  margin-right: 12px;
+  cursor: pointer;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  transition: all 0.3s;
+
+  i {
+
+    font-size: 11px;
+    line-height: 1;
+    transition: color 0.3s;
+
+    &.active {
+      color: $primary;
+    }
+  }
+
+  &.opened {
+    border: 1px solid $primary;
+  }
+}
+
+::ng-deep {
+  .orders-menu {
+    background: #24262C;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 2px;
+    box-shadow: 0px 0px 10px 0px #15161d;
+
+    .ant-dropdown-menu-item:hover, .ant-dropdown-menu-submenu-title:hover {
+      background-color: transparent;
+    }
+
+    .divider {
+      margin: 6px 0;
+    }
+
+    .ant-radio-wrapper {
+      font-size: 0.75rem;
+      font-weight: 400;
+      margin-top: 6px;
+      line-height: 1.2rem;
+      color: $text-80;
+    }
+  }
+
+  .order-dropdown-list {
+    min-width: 130px;
+
+    nz-option-item {
+      &:first-child {
+        border-bottom: 1px solid #51535a;
+      }
+    }
+  }
+}
+
+button {
+  height: 20px;
+  min-width: 20px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $darkBackground;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  margin-right: 2px;
+  transition: border-color .2s ease;
+
+  &:hover {
+    border-color: $primary;
+  }
+
+  i {
+    font-size: 12px;
+  }
+
+  &[disabled] {
+    opacity: 0.5;
+  }
+}
+
+.cancel-button {
+  height: 20px;
+  color: $text-80;
+  font-size: 11px;
+  padding: 0 4px;
+
+  .arrow {
+    font-size: 6px;
+    margin-left: 15px;
+  }
+}
+
+.cancel-dropdown-menu {
+  ul {
+    width: 100px;
+
+    li {
+      font-size: 11px;
+      line-height: 16px;
+      padding: 3px 5px;
+
+      &.divider {
+        margin: 3px 5px;
+        padding: 0;
+      }
+    }
+  }
+}
+
+.remove-order-button {
+  margin-left: 10px;
+}
+
+.submit-buttons {
+  display: flex;
+  margin: 0 10px;
+
+  i {
+    font-size: 8px;
+  }
+}
+
+.reprices-buttons {
+  display: flex;
+
+  .icon-arrow-down {
+    color: $red;
+  }
+
+  .icon-arrow-up {
+    color: $primary;
+  }
+}

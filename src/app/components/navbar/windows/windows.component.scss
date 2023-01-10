@@ -1,0 +1,140 @@
+@import "../base-workspace";
+
+:host ::ng-deep {
+  nz-select.ant-select {
+    width: 100px;
+    height: 28px;
+    background: $inputBackground;
+    font-size: 0.7rem;
+
+    nz-select-top-control {
+      background: $inputBackground !important;
+      height: 100% !important;
+      display: flex !important;
+      border: 1px solid transparent !important;
+      align-items: center;
+
+      &:hover {
+        box-shadow: 0 0 0 1px $primary;
+      }
+    }
+
+    &.ant-select-focused {
+      nz-select-top-control{
+        box-shadow: 0 0 0 1px $primary !important;
+      }
+    }
+  }
+}
+
+.workspace {
+  padding: 0;
+
+  &.is-opened {
+    .radio-btn {
+      pointer-events: none;
+    }
+
+    .icon-popup {
+      color: $primary;
+      pointer-events: none;
+    }
+
+    .icon-tool-delete {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+}
+
+::ng-deep .electron {
+  .workspace {
+    .ant-radio {
+      display: none;
+    }
+
+    .icon-popup {
+      display: none;
+    }
+  }
+}
+
+.ant-divider-horizontal {
+  margin-top: 8px;
+  margin-bottom: 4px;
+}
+
+.add-window {
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  margin-left: 3px;
+  margin-right: 3px;
+  height: 23px;
+  cursor: pointer;
+  margin-top: 4px;
+  border-radius: 2px;
+  padding-left: 8px;
+  padding-right: 8px;
+  user-select: none;
+  transition: all 0.3s;
+
+  i {
+    font-size: 10px;
+    margin-right: 4px;
+  }
+
+  &:hover {
+    background: $lighter;
+  }
+}
+
+::ng-deep {
+  .window-dropdown-menu {
+    min-width: 216px;
+
+    .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+      background: transparent;
+    }
+
+    nz-option-item {
+      &:hover {
+        background: $lighter !important;
+      }
+    }
+
+    cdk-virtual-scroll-viewport {
+      // min-height: 52px;
+    }
+  }
+
+  body.navbarTop .window-dropdown-menu {
+    margin-top: 4px;
+  }
+
+  body.navbarBottom {
+    .window-dropdown-menu {
+      margin-bottom: 4px;
+    }
+
+    nz-select {
+      .anticon-down {
+        transform: rotate(180deg);
+      }
+
+      &.ant-select-open .anticon-down {
+        transform: rotate(0) !important;
+      }
+    }
+  }
+}
+
+.workspace {
+  &:hover {
+    background-color: transparent;
+
+    .actions {
+      background: transparent;
+    }
+  }
+}

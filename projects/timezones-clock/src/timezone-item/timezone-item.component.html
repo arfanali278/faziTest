@@ -1,0 +1,27 @@
+<div class="utc-time">
+  <label nz-checkbox
+         [nzChecked]="timezone.enabled"
+         [nzDisabled]="checkboxDisabled"
+         *ngIf="showCheckbox"
+         (nzCheckedChange)="checkbox.emit($event)">
+  </label>
+
+  <div class="name">
+    <span *ngIf="!editing">{{timezone.name}}</span>
+
+    <input *ngIf="editing"
+           nz-input
+           type="text"
+           #inputElement
+           (blur)="handleInputBlur(inputElement.value)"
+           [value]="timezone.name">
+  </div>
+
+  <span class="icons-container" *ngIf="editable">
+    <i (click)="editing = true" title="Edit" class="icon-edit"></i>
+    <i (click)="reset.emit()" title="Reset" class="icon-reset"></i>
+    <i (click)="delete.emit()" *ngIf="canDelete" title="Remove from current" class="icon-close-window"></i>
+  </span>
+</div>
+
+<div class="subtitle" [style.fontSize.px]="subtitleFontSize">{{timezone.text}}</div>

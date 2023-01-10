@@ -1,0 +1,657 @@
+@import "scss/variables";
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/utilities";
+
+// @import "~ng-zorro-antd/style/index.min.css";
+@import "assets/icon-font/icon.css";
+
+.ant-btn, .ant-collapse {
+  font-size: $baseFontSize;
+}
+
+@import "scss/utilities";
+@import "scss/spacings";
+@import "scss/colors";
+@import "scss/fonts";
+@import "scss/animations";
+@import "scss/layout";
+@import "scss/modules";
+@import "./assets/ant/dark.css";
+@import "scss/dark.theme";
+@import "scss/template";
+
+@import "scss/light.theme";
+@import "scss/template";
+
+body,
+html {
+  font-weight: 400;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  font-size: $baseFontSize;
+}
+
+label {
+  font-weight: 600;
+}
+
+.ant-dropdown-menu, .ant-menu,  {
+  box-shadow: 0px 0px 15px #101114;
+}
+.workspaces{
+  box-shadow: 0px 0px 15px #101114;
+}
+
+body.electron {
+  border: 1px solid $darkBackground;
+  border-top: 1px solid $light;
+  // transition: border 0.3s;
+  &.navbarBottom {
+    border-top: 1px solid $darkBackground;
+    border-bottom: 1px solid $light;
+  }
+
+  &.highligt {
+  //  border: 1px solid $primary;
+  }
+}
+
+.timezones-select {
+  cdk-virtual-scroll-viewport {
+    max-height: 362px !important;
+  }
+}
+
+.ant-switch:hover, .ant-switch:focus:hover {
+  box-shadow: 0 0 0 2px rgb(72 149 245 / 20%);
+}
+
+.ant-modal.instrument-dialog .ant-modal-content {
+  .ant-modal-body {
+    padding: 0;
+    background-color: $light;
+  }
+
+  .ant-modal-close-x {
+    width: 19px;
+    height: 19px;
+    color: $text-60;
+    line-height: 20px;
+    font-size: 12px;
+  }
+}
+
+.col-resize {
+  cursor: col-resize;
+}
+
+.grab {
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.grabbing {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
+.navigation-bar {
+  -webkit-app-region: drag
+}
+
+.navigation-bar > * {
+  -webkit-app-region: no-drag
+}
+
+.spacer {
+  -webkit-app-region: drag;
+}
+
+.logo {
+  -webkit-app-region: drag;
+}
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.ant-checkbox-indeterminate {
+  .ant-checkbox-inner {
+    border: 1px solid #434343;
+  }
+}
+
+
+.ant-click-animating-node, [ant-click-animating-without-extra-node=true]::after {
+  animation: none;
+}
+
+.ant-switch:hover, .ant-switch:focus:hover:not(.ant-switch-checked) {
+  box-shadow: 0 0 0 2px rgb(72 149 245 / 20%);
+}
+
+.ant-switch:focus {
+  box-shadow: none;
+}
+
+
+.ant-checkbox-input:focus:not(:hover) + .ant-checkbox-inner {
+  border-color: $checkboxBorderColor;
+}
+
+.ant-checkbox-wrapper[disabled] .ant-checkbox + span {
+  color: $light3;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  border: 1px solid rgba($primary, 0.4);
+  background: none;
+
+  &:after {
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    background-color: $primary;
+    border: 0;
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+.ant-checkbox-disabled {
+  .ant-checkbox-inner {
+    border: 1px solid $light3 !important;
+  }
+}
+
+.ant-checkbox-indeterminate.ant-checkbox-disabled, .ant-checkbox-indeterminate {
+  .ant-checkbox-inner {
+    &::after {
+      background: transparent;
+      border: none;
+    }
+  }
+}
+
+.ant-checkbox-indeterminate {
+  .ant-checkbox-inner::after {
+    border: none;
+  }
+}
+
+.ant-message-loading {
+  color: white;
+  font-size: 0.7rem;
+  line-height: 1rem;
+}
+
+.ant-picker-dropdown {
+  font-size: 0.85rem;
+}
+
+.ant-select-item-empty {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  user-select: none;
+}
+
+.ant-message {
+  top: 40px !important;
+  display: flex;
+  justify-content: flex-end;
+}
+
+body.navbarBottom {
+  .ant-message {
+    top: unset !important;
+    bottom: 40px !important;
+  }
+}
+
+
+.color-picker.open {
+  background: $inputBackground;
+  border: 1px solid $lighter;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 10px $inputBackground;
+  border-radius: 2px;
+
+  input {
+    background: $darkBackground;
+    color: $text-80;
+    border: none !important;
+    outline: none;
+    font-size: 0.65rem;
+    height: 18px;
+  }
+
+  .saturation-lightness {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+  }
+
+  .selected-color {
+    border: none !important;
+    height: 30px;
+    width: 30px;
+
+    &-background {
+      height: 30px;
+      width: 30px;
+    }
+  }
+
+  .cursor, .box div .cursor {
+    border: 2px solid $text-80;
+  }
+
+  .box div {
+    color: $text-80 !important;
+    font-size: 0.65rem;
+  }
+}
+
+
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ant-select, .ant-checkbox-wrapper, .ant-radio-wrapper {
+  font-size: 0.7rem;
+}
+
+.ant-form-item-label > label {
+  font-size: 0.75rem;
+}
+
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  color: white;
+}
+
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled):hover {
+  color: white;
+  background: $lighter;
+}
+
+.ant-dropdown-menu-item {
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    background: $lighter;
+  }
+}
+
+.ant-select-item-option-content {
+  display: flex;
+  align-items: center;
+}
+
+.ant-select-dropdown {
+
+  .cdk-virtual-scroll-orientation-vertical .cdk-virtual-scroll-content-wrapper {
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+}
+
+.ant-select-item {
+  padding: 3px;
+  border-radius: 2px;
+  color: $text-80;
+  user-select: none;
+
+  &:not(:first-child) {
+    margin-top: 1px;
+  }
+}
+
+.ant-select-arrow {
+  font-size: 8px;
+  right: 6px;
+  top: 63%;
+}
+
+small {
+  font-size: 0.8rem;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+.ant-input {
+  border-radius: 0;
+}
+
+/*.ant-switch, nz-switch, .ant-click-animating-node {
+  transition: color 0.3s, background-color 0.3s;
+
+  &:after {
+    transition: color 0.3s, background-color 0.3s, transform 0.3s;
+  }
+}*/
+
+.ant-switch-checked {
+  background: rgba($primary, 0.2);
+
+  &:after {
+    background: $primary;
+  }
+}
+
+.ant-select-single.ant-select-sm:not(.ant-select-customize-input) .ant-select-selector,
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+  height: 20px;
+}
+
+nz-select {
+  height: 20px;
+  user-select: none;
+}
+
+window-header {
+  .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+    background: transparent;
+  }
+}
+
+.ant-select-single .ant-select-selector .ant-select-selection-item {
+  line-height: 20px;
+}
+
+.ant-select-single.ant-select-sm:not(.ant-select-customize-input) .ant-select-selector .ant-select-selection-item, .ant-select-single.ant-select-sm:not(.ant-select-customize-input) .ant-select-selector .ant-select-selection-placeholder {
+  line-height: 17px;
+  font-size: 0.7rem;
+}
+
+button {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+
+.ant-modal-content {
+  box-shadow: none !important;
+}
+
+.wm-draggable {
+  cursor: move;
+}
+
+.wm-window[class*="resize-"] {
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+    width: calc(100% + 6px);
+    height: calc(100% + 6px);
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    background-color: cadetblue;
+    opacity: 0;
+    z-index: 9000000;
+  }
+}
+
+.ant-dropdown-menu {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.ant-dropdown-menu-item {
+  border-radius: 2px;
+  padding: 3px;
+  user-select: none;
+}
+
+nz-message {
+  user-select: none;
+}
+
+.toolbar-dropdown {
+  .ant-dropdown-menu-item-divider,
+  .ant-dropdown-menu-submenu-title-divider {
+    margin: 0;
+    margin-left: 5%;
+    width: 90%;
+  }
+}
+
+.hide-arrow {
+  i {
+    svg {
+      display: none;
+    }
+  }
+}
+
+.watchlist-instrument-select.ant-select {
+  width: 100%;
+}
+
+.modal-data-grid {
+  text-align: center;
+
+  .ant-modal {
+    width: auto !important;
+    display: inline-block;
+    text-align: left;
+  }
+
+  .ant-modal-header,
+  .ant-modal-content {
+    background-color: #24262C;
+  }
+
+  .ant-modal-content {
+
+    .ant-modal-body {
+      text-align: center;
+
+      .ng-star-inserted {
+        text-align: left;
+      }
+    }
+  }
+
+  .ant-empty {
+    &-image,
+    &-description {
+      text-align: center !important;
+    }
+  }
+
+  .ant-transfer-list-content {
+    &::-webkit-scrollbar {
+      width: 2px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #51535A;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #737377;
+    }
+  }
+
+  .ant-transfer-list,
+  .ant-transfer-list-header {
+    background-color: #1B1D22;
+  }
+
+}
+
+.bracket-active {
+  color: $primary;
+}
+
+.ant-input-number:focus, .ant-input-number-focused {
+  box-shadow: none;
+}
+
+.ant-input-number-handler-wrap {
+  border-left: none;
+}
+
+.ant-input-number-handler-down {
+  border-top: none;
+}
+
+nz-input-number:not(.custom-form-control) {
+  height: 24px;
+  font-size: 0.8rem;
+
+  .ant-input-number-input {
+    height: 24px;
+  }
+
+  .ant-input-number-handler-wrap:hover .ant-input-number-handler {
+    height: 50%;
+  }
+
+  .ant-input-number-handler-wrap .ant-input-number-handler .ant-input-number-handler-up-inner,
+  .ant-input-number-handler-wrap .ant-input-number-handler .ant-input-number-handler-down-inner {
+    mask: url('~src/assets/img/svg/arrow-up.svg');
+    mask-size: 8px;
+    mask-repeat: no-repeat;
+    background-color: rgb(81, 83, 90);
+
+    svg {
+      display: none;
+    }
+
+  }
+
+  .ant-input-number-handler-wrap .ant-input-number-handler .ant-input-number-handler-down-inner {
+    mask-image: url('~src/assets/img/svg/arrow-down.svg');
+  }
+
+  .ant-input-number-handler-up:hover, .ant-input-number-handler-down:hover {
+    height: 50% !important;
+  }
+}
+
+.wm-header-btn {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+  font-size: 12px;
+  background-color: #101114;
+  border-radius: 2px;
+  transition: color 0.3s;
+
+  &:not(:first-child) {
+    margin-left: 4px;
+  }
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+.vertical-center-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .ant-modal {
+    top: 0;
+  }
+
+}
+
+.ant-modal-footer button + button {
+  margin-left: 16px;
+}
+
+.ant-modal {
+  .ant-modal-content {
+    padding: 0px;
+   // filter: drop-shadow(0px 0px 10px #15161D);
+    background: $secondary;
+    box-shadow: 0px 0px 20px #101114 !important;
+    border-radius: 2px;
+    .ant-modal-header {
+      background-color: $secondary;
+      border: none;
+      padding: 0;
+
+      .ant-modal-title {
+        font-size: 12px;
+        font-weight: 600;
+        padding: 4px 8px;
+      }
+    }
+
+    .ant-modal-body {
+      background-color: transparent;
+      border-radius: 2px;
+      text-align: center;
+      padding: 34px 91px;
+    }
+
+    .ant-modal-footer {
+      background-color: transparent;
+      border: none;
+      text-align: center;
+      padding: 0px 0 40px;
+
+      .modal-btn {
+        background-color: #101114;
+        color: #ffffff;
+        border-color: $primary;
+        transition: opacity .2s ease;
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+
+      button {
+        min-width: 70px;
+        height: 22px;
+        line-height: 1;
+        font-size: 10px;
+      }
+    }
+
+    .ant-modal-close-x {
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      font-size: 13px;
+    }
+  }
+}
+
+// Fix scrolling issue on select(system select in connection dialog)
+.ant-select-item-option-active:not(.ant-select-item-option-disabled):not(:hover),
+.ant-select-item-option-active:not(.ant-select-item-option-disabled):not(:hover) {
+  background-color: transparent;
+}
+
+.full-width {
+  width: 100%;
+}

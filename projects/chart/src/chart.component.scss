@@ -1,0 +1,1131 @@
+//@import "themes";
+@import "~src/scss/variables";
+@import "themes/Dark";
+@import "themes/template";
+
+@import "themes/default";
+@import "themes/template";
+
+$toolbarMargin: 4px;
+
+loader {
+  z-index: 100;
+  top: 22px;
+}
+
+.form-header {
+  font-size: 0.7rem;
+  line-height: 1rem;
+  color: $text-80;
+  padding-top: 8px;
+  font-weight: 600;
+  padding-left: 1px;
+}
+
+side-form {
+  width: 100px;
+  min-width: 100px;
+}
+
+.trading-instruments {
+  color: $text-40;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s;
+
+  & > * {
+    margin-left: 4px;
+    cursor: pointer;
+  }
+
+  .lock, .icon-widget-orders {
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    background: $darkBackground;
+    font-size: 12px;
+    line-height: 1;
+    color: $text-80;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icon-widget-orders {
+    margin-left: 7px;
+
+    &.active {
+      color: $primary;
+    }
+  }
+
+  .lock {
+    margin-right: 7px;
+
+    &.icon-lock {
+      color: $red;
+    }
+  }
+
+  .icon-window-left, .icon-window-right {
+    font-size: 8px;
+    line-height: 1;
+
+    &.active {
+      color: $primary;
+    }
+  }
+
+}
+
+::ng-deep {
+  .chart-menu-dropdown {
+    .ant-dropdown-menu-item {
+      padding: 1px 6px;
+    }
+  }
+
+  .scxThemeDark {
+    label {
+      margin-bottom: 0;
+    }
+
+    .scxSpectrum.sp-container {
+      background: $light;
+      border-color: $lighter !important;
+      box-shadow: none;
+
+      .sp-palette .sp-thumb-el {
+        border: none;
+      }
+    }
+
+    .scxDropdown .dropdown-menu {
+      box-shadow: none !important;
+      border-radius: 2px !important;
+      border: none;
+      box-shadow: none;
+      background-color: $light !important;
+      padding-top: 4px;
+      padding-bottom: 4px;
+
+      > li {
+        color: $text-80 !important;
+        border-radius: 2px;
+        padding-left: 3px;
+        padding-right: 3px;
+        background-color: transparent !important;
+
+        &:not(:first-child) {
+          margin-top: 2px;
+        }
+
+        a {
+          padding-left: 5px;
+          padding-top: 5px;
+          border-radius: 2px;
+          font-size: 0.8rem;
+        }
+
+        &.selected a {
+          font-weight: 600;
+        }
+
+        &.selected a, &:hover a {
+          background-color: $lighter !important;
+          color: #fff !important;
+        }
+      }
+    }
+
+    #scxFibonacciDrawingDialog .scxCoordinateTable tr td:first-child {
+      padding-bottom: 7px !important;
+    }
+
+    #scxDrawingDialog .modal-dialog .modal-content .modal-body .scxDrawingDialog_imagePreviewWrapper {
+      min-height: 160px;
+    }
+
+    .scxDialog .modal-dialog {
+      width: 437px !important;
+
+      h4 {
+        font-size: 1.15rem;
+      }
+
+
+      .scxButtonGroup > label {
+        color: $text-60 !important;
+        background: $light;
+        border: none;
+        font-size: 10px !important;
+        height: 20px;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        width: 20px;
+        background-position: center;
+        background-size: 16px;
+        background-repeat: no-repeat;
+
+        &.active {
+          background-color: $lighter;
+          color: $primary !important;
+          background-size: 12px;
+        }
+
+        &:not(:first-child) {
+          margin-left: 4px;
+        }
+      }
+
+      .scxTabPanel > div > label {
+        padding-left: 38px !important;
+        font-size: 0.7rem;
+        color: $text-40;
+        margin-bottom: 0;
+      }
+
+      .bootstrap-select.btn-group .dropdown-menu li {
+        height: 20px;
+
+        & > a {
+          padding: 0;
+          height: 20px;
+        }
+      }
+
+
+      .scx_switchery {
+        display: inline-block;
+        height: 10px;
+        width: 20px;
+        box-sizing: content-box;
+        border: none;
+        border-radius: 6px;
+        vertical-align: middle;
+        box-shadow: none !important;
+        cursor: pointer;
+        /*   box-shadow: rgba($primary, 0.2) 0px 0px 0px 0px inset !important;
+           border-color: rgba($primary, 0.2) !important;
+           background-color: rgba($primary, 0.2) !important;*/
+
+        & > small {
+          //   background: $primary !important;
+          width: 7px;
+          height: 7px;
+          top: 1.5px;
+        }
+      }
+
+      .sp-replacer {
+        border: none;
+        margin-top: 0 !important;
+
+        &.sp-disabled {
+          opacity: 0.5;
+          background: unset !important;
+        }
+      }
+
+
+      .sp-preview {
+        width: 20px;
+        height: 20px;
+        background: $light;
+        border-radius: 2px;
+
+        .sp-preview-inner {
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 50%;
+          border-radius: 2px;
+          border: 1px solid $light2;
+          height: 50%;
+          bottom: unset;
+          right: unset;
+        }
+      }
+
+      .dropdown-toggle.selectpicker {
+        height: 20px;
+        padding: 0px !important;
+        background-color: $light !important;
+        border: none;
+
+        .filter-option {
+          font-size: 0.8rem;
+          color: #fff;
+          padding-left: 8px;
+          height: 100%;
+          padding-top: 2px;
+        }
+      }
+
+      .modal-body {
+        overflow: hidden !important;
+      }
+
+      .modal-body, .modal-content {
+        &::-webkit-scrollbar {
+          width: 2px;
+        }
+
+        /* Track */
+        &::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+          background: $light2;
+          border-radius: 1px;
+        }
+
+        /* Handle on hover */
+        &::-webkit-scrollbar-thumb:hover {
+          background: $light2;
+        }
+      }
+
+      .modal-content {
+        background-color: $secondary !important;
+        color: $text-80 !important;
+        user-select: none;
+
+        .modal-header .close {
+          color: $text-80 !important;
+
+          &:hover {
+            color: #fff !important;
+            opacity: 1;
+          }
+        }
+
+        .table-condensed {
+          .btn {
+            color: $primary !important;
+          }
+
+          .btn[data-action=togglePeriod] {
+            background: $primary !important;
+            color: #fff !important;
+            font-size: 0.8rem;
+            padding-left: 7px;
+            padding-right: 7px;
+          }
+        }
+
+        .modal-body {
+          table {
+            td label {
+              font-size: 0.8rem;
+              color: $text-80;
+            }
+          }
+
+
+          .scxTabs {
+            border-bottom-color: $light3;
+          }
+
+          .scxTabs .scxTabItem {
+            font-size: 0.85rem;
+            color: $text-60;
+
+            &.active {
+              color: $primary;
+              font-weight: 600;
+              border-bottom-color: $primary;
+            }
+          }
+
+          table ~ label {
+            padding-left: 0;
+          }
+
+          table + a {
+            margin-left: 8px !important;
+          }
+
+          .close {
+            padding: 0 !important;
+            padding-top: 2px !important;
+            mask-image: url("~src/assets/img/svg/delete.svg");
+            mask-size: 14px;
+            mask-repeat: no-repeat;
+            mask-position: center center;
+            color: transparent !important;
+            background: $light2;
+          }
+        }
+
+        #scxTooltipView .scxTooltipView_tooltipTextStyles label.scxTooltipView_label_textItalic,
+        .scxTooltipView_label_textUnderline,
+        #scxTooltipView .scxTooltipView_tooltipTextStyles label.scxTooltipView_label_textBold {
+          background-image: none !important;
+          border-radius: 2px;
+
+          &.active {
+            background-color: $light3;
+          }
+        }
+
+        #scxTooltipView .scxTooltipView_tooltipTextStyles label.scxTooltipView_label_textItalic {
+          font-style: italic;
+          font-weight: 600;
+
+          &:before {
+            content: 'I';
+          }
+        }
+
+        #scxTooltipView .scxTooltipView_tooltipTextStyles label.scxTooltipView_label_textBold {
+          font-weight: 600;
+
+          &:before {
+            content: 'B';
+          }
+        }
+
+        .scxTooltipView_label_textUnderline, scxTooltipView_label_textUnderline.active {
+          text-decoration: underline;
+
+          &:before {
+            content: 'U';
+          }
+        }
+
+        .form-control {
+          background-color: $light !important;
+          border-radius: 2px;
+          color: #fff;
+          font-size: 0.8rem !important;
+          border: none;
+          height: 20px !important;
+
+          &:focus {
+            box-shadow: none;
+          }
+        }
+
+        textarea.form-control, .scxTooltipView_image_previewWrapper.form-control {
+          height: unset !important;
+        }
+
+        .scxTooltipView_image_previewWrapper.form-control {
+          min-height: 160px;
+          height: auto;
+          border: 1px solid $lighter !important;
+        }
+
+        #scxTooltipView #scxTooltipView_region_image td > * {
+          color: #fff;
+
+          &::placeholder {
+            color: #a1a2a5;
+          }
+        }
+
+        .scxCoordinate-type-item {
+          font-weight: 400 !important;
+        }
+
+        .bootstrap-datetimepicker-widget {
+          background: $light;
+          box-shadow: none;
+          border-color: $lighter;
+
+          table {
+            transition: all 0.3s;
+
+            th.picker-switch {
+              font-size: 1.2rem;
+              transition: all 0.3s;
+            }
+
+            th.dow {
+              font-size: 0.9rem;
+            }
+
+            td {
+              font-size: 0.8rem;
+            }
+
+            thead tr:first-child th:hover {
+              background: transparent;
+            }
+
+            td span, td.day, td.minute, td.hour {
+              transition: all 0.3s;
+
+              &:hover {
+                background: rgba($primary, 0.4);
+              }
+            }
+
+            td.active, td span.active {
+              background: $primary;
+            }
+
+            td.new, td.old {
+              color: $text-40;
+
+              &:hover {
+                color: rgba(161, 162, 165, 1);
+              }
+            }
+          }
+
+          a[data-action=togglePicker] {
+            color: $primary !important;
+          }
+        }
+      }
+    }
+
+    .scxDialog .modal-dialog .modal-content .modal-footer button.btn, .scxSpectrum.sp-container .btn {
+      font-size: 0.75rem !important;
+      padding-left: 15px;
+      padding-right: 15px;
+
+      &.btn-default, &.sp-cancel, &.btn-warning {
+        color: #fff;
+        background: $inputBackground;
+        border: 1px solid $primary;
+      }
+
+      &.btn-success {
+        background-color: #5cb85c;
+      }
+
+      &.btn-primary, .btn-info, &.sp-choose {
+        background-color: $primary;
+        border: none;
+
+      }
+    }
+
+    .scxContextMenu {
+      background-color: $light !important;
+      border: 0px solid $lighter;
+      box-shadow: 0px 0px 20px #101114 !important;
+      padding-left: 4px;
+      padding-right: 4px;
+
+      & > li {
+        font-size: 0.8rem;
+
+        &.divider {
+          margin: 4px 1px;
+        }
+
+        > a {
+          color: $text-80 !important;
+          padding-right: 10px;
+          border-radius: 2px;
+
+          &:hover {
+            background-color: $lighter !important;
+          }
+        }
+
+        &.disabled {
+          > a {
+            color: $text-40 !important;
+          }
+        }
+      }
+    }
+  }
+
+  .confirm-order {
+    margin: 0;
+
+    .ant-modal-content {
+      width: 379px;
+      animation: fadeIn 0.3s;
+
+      .ant-modal-body {
+        padding: 30px 40px;
+        width: 376px;
+        min-width: 376px;
+      }
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.3) translateY(100px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  .modal-content {
+    max-height: 90vh;
+    overflow: auto;
+  }
+
+  .modal.scxDialog {
+    h4 {
+      color: white;
+    }
+  }
+}
+
+.chart-menu-dropdown {
+  min-width: 110px;
+
+  li {
+    line-height: 16px;
+  }
+}
+
+.vertical-line {
+  width: 1px;
+  height: 12px;
+  margin-left: 3px;
+  background: $light2;
+}
+
+.instrument-description {
+  margin-left: 5px;
+  font-size: 0.8rem;
+  color: $text-80;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  pointer-events: none;
+  cursor: move;
+  white-space: nowrap;
+}
+
+:host ::ng-deep {
+  window-header{
+    background: $light;
+  }
+  instrument-select {
+    nz-select {
+      min-width: 1px;
+      width: auto;
+    }
+  }
+
+  .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+    padding: 0;
+    padding-left: 4px;
+    padding-right: 9px;
+  }
+
+  .ant-select-single.ant-select-show-arrow .ant-select-selection-item, .ant-select-single.ant-select-show-arrow .ant-select-selection-placeholder {
+    padding-right: 10px;
+  }
+
+  .scxCrossHairTradingButton {
+    display: none;
+  }
+
+  side-form {
+    button.top-position-btn {
+      margin-top: 8px;
+    }
+  }
+
+  .scxPanelTitleValue {
+    margin-left: 2px;
+  }
+
+  .scxPanelOptions {
+    padding-top: 4px;
+
+    & > span {
+      &:not(:first-child) {
+        margin-left: 2px;
+      }
+    }
+  }
+
+  .scxPanelSettings, .scxPanelMaximize, .scxPanelRestore, .scxPanelMoveUp, .scxPanelMoveDown, .scxPanelClose {
+    height: 16px;
+    width: 16px;
+    background: $light !important;
+    position: relative;
+    color: #fff !important;
+    border-radius: 1px;
+
+    &:before {
+      position: absolute;
+      top: 0;
+      mask-size: 9px;
+      mask-position: center;
+      left: 0;
+      content: "";
+      height: 100%;
+      width: 100%;
+      color: #fff !important;
+      background: #FFFFFF !important;
+      mask-repeat: no-repeat;
+    }
+  }
+
+  $chartPanelButtons: (scxPanelSettings: "setting-gear", scxPanelClose: "close",
+    scxPanelMoveDown: "arrow-down-general", scxPanelMoveUp: "arrow-up-general",
+    scxPanelMaximize: "maximize-indicator", scxPanelRestore: "minimize-indicator");
+
+  @each $name, $icon in $chartPanelButtons {
+    .#{$name}:before {
+      mask-image: url("~src/assets/img/svg/#{$icon}.svg");
+    }
+  }
+
+  .scxPanelScrollToLast, .scxPanelScrollToLast:hover {
+    color: #fff !important;
+    background: $light !important;
+    border-radius: 1px;
+    line-height: 1;
+  }
+
+  .scxControl-open, .scxControl-high, .scxControl-low, .scxControl-close {
+    margin-right: 5px;
+  }
+
+  .scxControl-close {
+    margin-right: 5px;
+  }
+
+  .hide-oclc {
+
+    .scxControl-open, .scxControl-high, .scxControl-low, .scxControl-close, .scxPanelTitleValue:not(.scxControl) {
+      display: none;
+    }
+  }
+
+  .scxPanelTitle .scxSymbolTitle {
+    color: #fff !important;
+    font-size: 0.93rem;
+    padding-left: 4px;
+    margin-bottom: 51px;
+  }
+
+
+  .scxSymbolTitle .scxControl-change {
+    display: inline-flex;
+    align-items: baseline;
+    margin-left: 0;
+
+    i {
+      font-size: 12px;
+      margin-right: 4px;
+
+      &.icon-arrow-down-general {
+        color: $red;
+      }
+
+      &.icon-arrow-up-general {
+        color: $success;
+      }
+    }
+  }
+
+  .hide-changes {
+    .scxControl-change {
+      display: none;
+    }
+  }
+
+  .scxPanelTitleCaption {
+    display: none !important;
+  }
+
+  .custom-form-control {
+    background: transparent;
+    width: auto;
+  }
+
+
+  nz-select-placeholder, nz-select-item {
+    line-height: 18px !important;
+  }
+
+  .ant-select-arrow {
+    top: 64%;
+    font-size: 8px;
+    /*  right: 6px;*/
+    line-height: 1;
+  }
+
+  .custom-form-control.ant-select-focused .ant-select-selector {
+    border: 1px solid transparent !important;
+  }
+
+  .ant-select-single.ant-select-sm:not(.ant-select-customize-input) .ant-select-selector {
+    height: 20px;
+  }
+
+  .ant-select-selection-search {
+    height: 18px;
+    line-height: 1;
+  }
+}
+
+instrument-select {
+  max-width: 110px;
+}
+
+:host ::ng-deep .icon-container {
+  cursor: pointer;
+  border-radius: 3px;
+  width: 20px;
+  position: absolute;
+  right: 7px;
+  bottom: 7px;
+  z-index: 27;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .icon-arrow-right,
+  .icon-arrow-left {
+    font-size: 14px;
+  }
+}
+
+:host ::ng-deep {
+  .disappearing {
+    width: 0;
+    opacity: 0;
+    visibility: hidden;
+    padding: 0;
+  }
+
+  order-form {
+    transition: all 0.3s;
+  }
+}
+
+.component-container {
+  display: flex;
+  height: 100%;
+
+  &.window-left {
+    flex-direction: row-reverse;
+  }
+}
+
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  //&:hover {
+  //  cursor: grab;
+  //}
+}
+
+.scxToolbar-multiDropdown,
+.scxToolbarButton-dropdownElementsContainer,
+.scxTimeFramePicker-dropdownContainer {
+  max-height: calc(85vh - 50px);
+}
+
+.scxTimeFramePicker-dropdownContainer {
+  width: auto !important; // because set width from js
+}
+
+:host {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  ::ng-deep .scxNavigation {
+    [class^="icon-"],
+    [class*=" icon-"] {
+      font-family: "scx-icons", serif !important;
+    }
+  }
+
+  ::ng-deep {
+    order-form {
+      height: 100%;
+    }
+
+    .scxChartPanel ~ .scxChartPanel .scxPanelTitle {
+      margin-top: 5px;
+    }
+
+    .scxPanelTitle {
+      position: absolute;
+      z-index: 20;
+      margin-top: 0px;
+      padding: 1px 5px 0 0;
+      margin-left: 2px;
+
+      > div {
+        vertical-align: unset;
+      }
+
+      .scxToggleIndicatorTitles {
+        margin-top: 56px;
+        margin-left: 3px;
+        display: none !important;
+      }
+
+      .scxIndicatorTitle {
+        margin-left: 3px;
+        display: none !important;
+
+        .scxPanelTitleCaption {
+          display: inline-block !important;
+        }
+      }
+
+      .scxPanelTitleCaption {
+        margin-left: 5px;
+      }
+    }
+
+    .scxControl-date {
+      display: none;
+    }
+  }
+
+  ::ng-deep .scxToolbar-btn.scxToolbar-btn-theme {
+    display: none;
+  }
+
+  .scxRootContainer.scxFullWindow {
+    height: 100% !important;
+    width: 100% !important;
+  }
+
+  .chart-wrapper {
+    height: 100%;
+    //margin-top: -4px;
+    display: flex;
+  }
+
+  .scroll-wrapper {
+    width: 40px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100%;
+  }
+
+  .scroll-btn {
+    height: 20px;
+    cursor: pointer;
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+    background-color: #3f4653;
+
+    &.scxToolbar-scroll-top {
+      top: 0;
+    }
+
+    &.scxToolbar-scroll-bottom {
+      bottom: 0;
+    }
+
+    span {
+      display: block;
+      height: 20px;
+      position: relative;
+
+      &:before {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 18px;
+      }
+    }
+  }
+
+  .scxToolbar {
+    padding: 0;
+    min-height: 0;
+
+    &.horizontal {
+      width: calc(100% - #{$toolbarMargin} * 2);
+      height: 30px;
+      margin: $toolbarMargin;
+      background: rgb(63, 69, 83);
+      border-radius: 4px;
+      display: flex;
+      overflow: hidden;
+
+      .left {
+        flex-grow: 1;
+        display: flex;
+
+        &:after {
+          content: "";
+          display: inline-block;
+          height: 100%;
+          vertical-align: middle;
+        }
+
+        .inputWrapper {
+          height: 26px;
+          margin: 2px;
+          border-radius: 4px;
+          background-color: #272b37;
+          width: 150px;
+
+          instrument-search {
+            height: 100%;
+            border: none;
+          }
+
+          .scxInstrumentSearchInputField {
+            border-color: transparent;
+            width: 100%;
+            height: 100%;
+            text-align: left;
+            padding: 0 10px;
+            border-radius: inherit;
+
+            &.active,
+            &:hover {
+              background: #272b37;
+            }
+
+            &:focus {
+              box-shadow: none;
+            }
+          }
+        }
+
+        .scxTimeFramePicker {
+          height: 26px;
+          margin: 2px;
+          background: #272b37;
+          border-radius: 4px;
+
+          &.hover,
+          &.active {
+            background: #272b37;
+          }
+
+          .scxToolbarButton-buttonWrapper {
+            background: transparent;
+          }
+        }
+      }
+
+      .right {
+        color: white;
+        display: flex;
+        align-items: center;
+
+        i {
+          vertical-align: middle;
+          padding: 5px;
+          margin-right: 5px;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+
+        .scxToolbarSaveImage {
+          &:hover {
+            background: transparent;
+          }
+        }
+      }
+    }
+
+    &.vertical {
+      display: inline-flex;
+      flex-direction: column;
+      width: 40px;
+      height: auto;
+      background: #272b37;
+      overflow-x: hidden;
+      overflow-y: hidden;
+    }
+  }
+
+  &.chart-unavailable {
+    .scxToolbarSaveImage,
+    .scxToolbar-btn-theme,
+    .order-icon,
+    .scxToolbarButton {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+}
+
+.order-icon {
+  &:after {
+    content: "";
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  i {
+    color: #cfc9c5;
+    vertical-align: middle;
+    opacity: inherit;
+  }
+}
+
+/*:host ::ng-deep .scxToolbar-scroll{
+  display: none;
+}*/
+
+::ng-deep body {
+  .scxWatermarkInfo,
+  .scxWatermarkSymbol {
+    line-height: 70px;
+  }
+
+  .scxRootContainer {
+    height: 100%;
+    width: calc(100%) !important;
+    text-align: center;
+    margin-top: 0;
+    padding: 0 4px 4px 0;
+  }
+
+  .scxToolbar-scroll {
+    position: relative;
+    height: 35px;
+  }
+
+  .scxContainer {
+    width: 100% !important;
+    margin-top: 0;
+    border: none !important;
+  }
+}
+
+::ng-deep {
+  .custom-volume-profile-templates {
+    .ant-dropdown-menu-submenu-title {
+      padding: 2px 6px;
+
+    }
+
+    & > .anticon:first-child, .ant-dropdown-menu-item > span > .anticon:first-child, .ant-dropdown-menu-submenu-title > .anticon:first-child, .ant-dropdown-menu-submenu-title > span > .anticon:first-child {
+      font-size: 8px;
+    }
+  }
+
+  .custom-volume-profile-subitems {
+    min-width: 75px;
+  }
+}

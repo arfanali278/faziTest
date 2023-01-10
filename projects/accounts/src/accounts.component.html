@@ -1,0 +1,189 @@
+<window-header [window]="this"></window-header>
+<div class="custom-panels">
+  <div class="custom-panel custom-panel-fixed">
+    <div class="custom-panel-body">
+      <cdk-virtual-scroll-viewport class="right-border" [itemSize]="">
+        <nz-collapse  class="custom-collapse-ghost">
+          <nz-collapse-panel
+            *ngFor="let broker of brokers"
+            [nzHeader]="broker.title"
+            [nzExtra]="createButton"
+            (click)="handleBrockerClick($event, broker)"
+            [nzShowArrow]="false"
+            [nzActive]="broker == selectedBroker"
+          >
+            <ng-template #createButton>
+            <span
+              [title]="!canAddAccount(broker) ? 'You can\'t add more connections': ''"
+              [class.add-disabled]="!canAddAccount(broker)"
+              class="small add-connection link" (click)="openCreateForm($event, broker)">
+              <i class="icon-add font-size-inherit"></i>
+            </span>
+            </ng-template>
+
+            <div>
+
+              <div
+                *ngFor="let item of getConnectionsByBroker(broker); let index = index"
+                class="selectable-item pl-4 mt-1"
+                (contextmenu)="contextMenu($event, contentTemplate)"
+                [class.renaming]="item.renaming"
+                [class.selectable-item-active]="item.id === selectedItem?.id && !item.renaming"
+                [ngClass]="{ 'loading-block loading-block-small': item.loading }"
+                (click)="selectItem(item, true)"
+              >
+                <ng-container *ngIf="!item.renaming">
+                  <div [title]="item.name" class="position-relative">
+                <span class="indicator prefix" [ngClass]="{
+                  'success': item.connected,
+                  'error': item.error,
+                  'connecting': item.loading
+                }"></span>
+                    <span class="connection-name">{{ item.name }}</span>
+                  </div>
+                  <div>
+                  <span
+                    class="selectable-item-action"
+                    [class.selectable-item-action-active]="item.favorite"
+                    (click)="toggleFavorite($event, item)"
+                  >
+                  <i class="font-size-inherit" [ngClass]="{
+                    'icon-star-o': !item.favorite,
+                    'icon-star': item.favorite
+                  }"></i>
+                </span>
+
+                  </div>
+                </ng-container>
+                <input *ngIf="item.renaming"
+                       class="rename"
+                       #input
+                       (keydown.enter)="item.renaming = false; rename(input.value, item)"
+                       (focusout)="item.renaming = false;"
+                       [value]="item.name || item.toString()" nz-input type="text">
+                <nz-dropdown-menu #contentTemplate="nzDropdownMenu">
+                  <ul class="broker-actions" nz-menu>
+                    <li nz-menu-item (click)="item.renaming = true; " class="broker-action">Rename</li>
+                    <li nz-menu-item (click)="delete($event, item);" class="broker-action">Delete</li>
+                  </ul>
+                </nz-dropdown-menu>
+              </div>
+            </div>
+          </nz-collapse-panel>
+        </nz-collapse>
+      </cdk-virtual-scroll-viewport>
+    </div>
+  </div>
+  <div  tabindex="1" (keydown.enter)="handleSubmit()" class="custom-panel">
+    <div class="custom-panel-body">
+      <cdk-virtual-scroll-viewport [itemSize]="">
+        <div class="h-100 pl-1 pr-2 bg-light rounded" *ngIf="selectedItem">
+          <img
+            class="img-responsive broken-logo d-table mx-auto my-2"
+            src="assets/img/brokers/{{ selectedBroker.logo }}"
+            [alt]="selectedBroker.title"
+            *ngIf="selectedBroker?.logo"
+          />
+          <form
+            nz-form
+            [formGroup]="form"
+            [class.loading-block]="selectedItem?.loading"
+            [class.block-pointer]="selectedItem?.loading"
+            (submit)="handleSubmit()"
+            *ngIf="!selectedItem.connected"
+          >
+            <account-form [isSubmitted]="isSubmitted"
+                           #userData
+                           (autoSavePasswordChange)="autoSavePasswordChange($event)"
+                           formControlName="userData"></account-form>
+            <!-- <label class="split-connection">
+              <span class="split-title">Split Connection</span>
+
+              <nz-switch
+                [ngModelOptions]="{standalone: true}"
+                [(ngModel)]="splitConnections" nzSize="small"></nz-switch>
+            </label> -->
+
+            <label class="custom-checkbox aggregated-quotes">
+              <input
+                type="checkbox" formControlName="aggregatedQuotes">
+              <span>Aggregated Quotes</span>
+            </label>
+
+            <label class="custom-checkbox mb-1">
+              <input
+                type="checkbox" formControlName="connectOnStartUp">
+              <span>Connect on start up</span>
+            </label>
+            <button
+              nz-button
+              nzType="primary"
+              tabindex="1"
+              (keydown.enter)="handleSubmit()"
+              nzBlock
+              class="ant-btn connect-button ant-btn-primary text-uppercase mt-3 mb-4"
+            >Connect</button>
+          </form>
+          <div *ngIf="selectedItem.connected">
+            <div class="p-3 bg-secondary rounded">
+              <table>
+                <tr class="space-beetwen">
+                  <div>
+                    <td>
+                      <span class="text-muted">Status:&nbsp;</span>
+                    </td>
+                    <td>
+                      <span class="d-flex connected-status">
+                        <span class="indicator indicator-table success mr-2"></span>
+                        Connected
+                      </span>
+                    </td>
+                  </div>
+                  <div>
+                    <span class="default-label">Default</span>
+                  <nz-switch nzSize="small" [nzDisabled]="disableDefaultChange" [ngModel]="selectedItem.isDefault" (ngModelChange)="$event ? makeDefault(selectedItem) : selectFreeConnectionAsDefault()"></nz-switch>
+                  </div>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="text-muted">Login:&nbsp;</span>
+                  </td>
+                  <td>
+                    <span class="right-text">{{ selectedItem.username }}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="text-muted">Server:&nbsp;</span>
+                  </td>
+                  <td>
+                    <span class="right-text">{{ selectedItem.server }}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="text-muted">Gateway:&nbsp;</span>
+                  </td>
+                  <td>
+                    <span class="right-text">{{ selectedItem.gateway }}</span>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <button
+              nz-button
+              nzType="primary"
+              nzBlock
+              class="bg-secondary text-uppercase disconnect-button"
+              [ngClass]="{ 'loading-block block-pointer loading-block-small': selectedItem?.loading }"
+              (click)="disconnect(selectedItem)">Disconnect
+            </button>
+          </div>
+          <div class="text-muted" *ngIf="selectedBroker?.description && !selectedItem.connected">
+            <div class="broker-description text-center" [innerHTML]="selectedBroker.description"></div>
+          </div>
+        </div>
+      </cdk-virtual-scroll-viewport>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<window-header (close)="saveState()" [window]="this"></window-header>
+<div class="dom-settings">
+  <div class="d-flex h-100">
+    <ul class="menu">
+      <li
+        class="menu-item"
+        [class.active]="isTabActive(item)"
+        [class.submenu-active]="isSubMenuActive(item)"
+        [class.expanded]="item.expanded"
+        [class.submenu-item]="item.children"
+        (click)="toggleMenuItem(item)"
+        *ngFor="let item of list"
+      >
+        <div class="d-flex menu-item-inner">
+          <span>{{item.label}}</span>
+          <i *ngIf=" item.children"
+             class="icon-arrow-down"></i>
+        </div>
+        <ul *ngIf="item.children" class="sub-menu">
+          <li
+            class="menu-item"
+            (click)="$event.stopPropagation(); select(item)"
+            [class.active]="isTabActive(item)"
+            *ngFor="let item of item.children"
+          >
+            {{item.label}}
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <div class="d-flex h-100 w-100 content-container  flex-column">
+      <table class="table-header" *ngIf="currentTab === settingsTab.Hotkeys">
+        <thead>
+        <tr>
+          <th class="w-50">Functions</th>
+          <th>
+            <div class="d-flex align-items-center justify-content-between">
+              Keys
+              <button class="clear-all" nzSize="small" (click)="clearAll()" nz-button nzType="link">Clear All</button>
+            </div>
+          </th>
+        </tr>
+        </thead>
+      </table>
+      <cdk-virtual-scroll-viewport [class.split-orders]="settings?.orders.split" class="{{currentTab}}" itemSize="">
+        <formly-form
+          [form]="form"
+          [(model)]="settings"
+          [fields]="selectedConfig"
+        >
+        </formly-form>
+      </cdk-virtual-scroll-viewport>
+    </div>
+  </div>
+
+</div>
+

@@ -1,0 +1,33 @@
+<window-header [window]="this">
+  <button nz-button nzSize="small" (click)="acceptAllNotifications()" class="ml-auto dark-btn">Mark All Read</button>
+</window-header>
+<div class="list-container">
+  <cdk-virtual-scroll-viewport [itemSize]="">
+    <div *ngFor="let group of notificationsGroup">
+      <div *ngIf="group.date.length" class="date">{{group.date}}</div>
+    <div [title]="notification.hoverInfo ? notification.hoverInfo : '' " [class.is-read]="notification.status === statuses.ACCEPTED" (click)="acceptNotification(notification.id)" class="notification {{notification.type}}"
+      *ngFor="let notification of group.notifications">
+      <div class="header">
+        <div class="icon">
+          <span class="{{notification.icon}}">
+          </span>
+        </div>
+        <div class="title">
+          {{notification.title}}
+        </div>
+        <div class="timestamp">
+          {{notification.createAt | date: 'HH:mm:ss'}}
+        </div>
+      </div>
+
+      <div class="body">
+        {{notification.body}}
+      </div>
+
+    </div>
+    </div>
+    <div *ngIf="!hasNotifications" class="no-notifications">
+      No notification yet
+    </div>
+  </cdk-virtual-scroll-viewport>
+</div>

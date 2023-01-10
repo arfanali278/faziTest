@@ -1,0 +1,43 @@
+@import "~src/scss/variables";
+
+:host {
+  font-size: 11px;
+  color: $text-80;
+  background: $secondary !important;
+
+  ::ng-deep {
+    window-header {
+      background: $secondary;
+    }
+
+    .time-zones {
+      nz-select {
+        display: block;
+        width: calc(100% - 65px) !important;
+      }
+    }
+
+    .ant-select {
+      nz-select-top-control {
+        padding-left: 6px !important;
+        padding-right: 3px !important;
+      }
+    }
+  }
+}
+
+cdk-virtual-scroll-viewport {
+  overflow-x: hidden;
+}
+
+.session-select {
+  width: 40%;
+}
+
+.divider {
+  margin: 12px 0;
+}
+
+.ant-btn {
+  font-size: inherit;
+}

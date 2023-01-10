@@ -1,0 +1,261 @@
+<div class="toolbar-container">
+  <div [class.tool-active]="isDrawingsVisible" class="tool btn-group">
+    <nz-button-group
+      nzOverlayClassName="toolbar-dropdown"
+      nz-dropdown
+      (click)="toggleDrawingVisible()"
+      [nzTrigger]="null"
+      (focusout)="closeDrawing()"
+      [nzClickHide]="false"
+      [nzVisible]="isDrawingsVisible"
+      [nzDropdownMenu]="menu2"
+      nzPlacement="bottomLeft"
+    >
+      <button nz-button>
+        <span class="icon-tool-drawings"></span>
+      </button>
+      <i class="icon-arrow-down"></i>
+    </nz-button-group>
+
+    <nz-dropdown-menu #menu2="nzDropdownMenu">
+      <ul class="drawing-menu" nz-menu [style.left.px]="drawingMenuOffset.x" [style.top.px]="drawingMenuOffset.y">
+        <li (click)="addDrawing(drawing)" [title]="drawing.formattedName" nz-menu-item
+            *ngFor="let drawing of lastUsedDrawings">
+          <span class="scx-icon icon-drawing-{{drawing.className}}"></span>
+        </li>
+        <li *ngIf="lastUsedDrawings.length" class=" toolbar divider"></li>
+        <li [title]="chart?.stayInDrawingMode? 'Leave Draw Mode': 'Stay in Draw Mode'" nz-menu-item
+            (click)="stayInDragMode()">
+          <i
+            [ngStyle]="{color: chart?.stayInDrawingMode? '#fff': null}"
+            class="icon-pen"></i>
+        </li>
+        <li nz-submenu [nzTitle]="customDrawingTemplate">
+          <ul>
+            <li (click)="createVolumeProfile()" nz-menu-item>New</li>
+            <li nz-menu-divider></li>
+            <li *ngFor="let template of items" class="custom-drawing-menu-item"
+                (click)="loadCustomeVolumeTemplate(template)" nz-menu-item>{{ template.name }}
+              {{template.settings.general.drawVPC | keyBinding}}
+              <span *ngIf="!template.isDefault" class="actions"><i (click)="editCustomProfile(template)"
+                                                                   class="icon-edit"></i> <i
+                (click)="deleteVolumeProfile(template)" class="icon-close-window"></i></span></li>
+          </ul>
+        </li>
+        <ng-template #customDrawingTemplate>
+          <i class="icon-custom-drawings"></i>
+        </ng-template>
+        <ng-container *ngFor="let drawingInstrument of drawingInstruments">
+          <li nz-submenu
+              *ngIf="!hasOneDrawing(drawingInstrument); else oneItemTemplate"
+              [title]="drawingInstrument.name"
+              [class.hide-arrow]="hasOneDrawing(drawingInstrument)"
+              (click)="hasOneDrawing(drawingInstrument) && addDrawing(drawingInstrument.items[0])"
+              [nzTitle]="iconTitle">
+            <ng-template #iconTitle><i class="icon-{{drawingInstrument.icon}}"></i></ng-template>
+            <ul class="toolbar-submenu">
+              <li *ngFor="let item of drawingInstrument.items" nz-menu-item
+                  data-name="{{item.formattedName}}"
+                  (click)="addDrawing(item)">
+                <span class="scx-icon icon-drawing-{{item.className}}"></span>
+                <span class="drawing-instrument-name">{{item.formattedName}}</span>
+              </li>
+            </ul>
+          </li>
+
+          <ng-template #oneItemTemplate>
+            <li nz-menu-item
+                [title]="drawingInstrument.name"
+                (click)="addDrawing(drawingInstrument.items[0])">
+              <i class="scx-icon icon-drawing-{{drawingInstrument.items[0].className}}"></i>
+            </li>
+          </ng-template>
+        </ng-container>
+        <li class="divider toolbar"></li>
+        <li [title]="chart?.showDrawings? 'Hide Drawings': 'Show Drawings'" nz-menu-item (click)="visible()">
+          <i
+            [class.icon-visible]="chart?.showDrawings"
+            [class.icon-not-visible]="!chart?.showDrawings"></i>
+        </li>
+        <li title="Remove Drawing" nz-menu-item (click)="removeDrawing()">
+          <i class="icon-delete"></i>
+        </li>
+        <li nz-menu-item class="empty-element"></li>
+        <li title="Pin"
+            (click)="isDrawingsPinned = !isDrawingsPinned" nz-menu-item>
+          <i
+            [ngStyle]="{color: isDrawingsPinned ? '#fff': null}"
+            [class.icon-unpin]="isDrawingsPinned" [class.icon-pin]="!isDrawingsPinned"></i>
+        </li>
+      </ul>
+    </nz-dropdown-menu>
+  </div>
+
+  <!--  <div class="tool tool-wide select">
+     <instrument-select
+        size="small"
+        placeholder="Symbol"
+        [instrument]="instrument"
+        (instrumentChange)="instrument = $event"
+      ></instrument-select>
+    </div>-->
+
+  <!--  <div [class.tool-active]="frame.nzOpen" title="Frame Interval" class="tool">
+      <nz-select
+        #frame
+        [nzShowArrow]="false"
+        [compareWith]="compareTimeFrame"
+        [nzOptionHeightPx]="22"
+        nzDropdownClassName="toolbar-dropdown"
+        [(ngModel)]="timeFrame"
+        [nzCustomTemplate]="timeFrameTemplate"
+        nzSize="small"
+      >
+        <ng-template #timeFrameTemplate let-selected>
+          {{ getShortTimeFrame(selected.nzValue) }}
+        </ng-template>
+        <nz-option
+          *ngFor="let option of timeFrameOptions"
+          [nzValue]="option"
+          [nzLabel]="getTimeFrame(option)"
+        >
+        </nz-option>
+      </nz-select>
+      <i (click)="frame.setOpenState(true)" class="icon-arrow-down timeframe-icon"></i>
+    </div>
+  &ndash;&gt;-->
+  <div title="Frame Interval" class="tool frame-tool">
+    <button nz-button nz-popover
+            class="frame-button"
+            nzPopoverPlacement="bottomLeft"
+            nzPopoverOverlayClassName="chart-frame-interval" nzPopoverTrigger="click"
+            [nzPopoverMouseLeaveDelay]="0"
+            [(nzPopoverVisible)]="showFramePopover"
+            [nzPopoverContent]="frameIntervalTemplate">
+      <span *ngIf="timePeriod">
+        {{timePeriod | timeframeTransform}}
+      </span>
+      <i class="icon-arrow-down" [class.is-open]="showFramePopover"></i>
+    </button>
+  </div>
+  <div [class.tool-active]="price.nzOpen" title="Bar Style" class="tool">
+    <nz-select
+      #price
+      [(nzOpen)]="priceOpen"
+      [nzShowArrow]="false"
+      [nzOptionHeightPx]="23"
+      [nzCustomTemplate]="defaultTemplate"
+      [nzDropdownClassName]="'toolbar-dropdown'"
+      [(ngModel)]="priceStyle"
+      nzSize="small"
+    >
+      <nz-option
+        *ngFor="let option of priceStyles"
+        [nzValue]="option"
+        [nzLabel]="option"
+        nzCustomContent
+        (click)="changePriceStyle(option)"
+      >
+        <span class="scx-icon icon-{{option}}"></span>
+        {{priceStyleNames[option]}}
+      </nz-option>
+    </nz-select>
+    <i (click)="price.setOpenState(true)" class="icon-arrow-down"></i>
+  </div>
+
+
+  <div title="Indicators" class="tool center">
+    <nz-button-group nzSize='small'>
+      <button
+        nz-button
+        nzPlacement="bottomRight"
+        (click)="openIndicatorDialog($event)"
+      >
+        <span class="icon-tool-indicators"></span>
+      </button>
+    </nz-button-group>
+  </div>
+  <div title="Trading on" class="tool center">
+    <nz-button-group nzSize='small'>
+      <button
+        nz-button
+        nzPlacement="bottomRight"
+        (click)="toggleForm()"
+      >
+        <span [class.show-form]="enableOrderForm" class="icon-chart-form"></span>
+      </button>
+    </nz-button-group>
+  </div>
+
+
+  <div [class.tool-active]="zoomDropdownVisible" title="Zoom" class="tool btn-group">
+    <nz-button-group
+      nzTrigger="click"
+      nzOverlayClassName="toolbar-dropdown"
+      [(nzVisible)]="zoomDropdownVisible"
+      [nzBackdrop]="false"
+      nz-dropdown [nzDropdownMenu]="menu1"
+    >
+      <button nz-button>
+        <span class="icon-tool-zoom"></span>
+      </button>
+      <i class="icon-arrow-down"></i>
+    </nz-button-group>
+
+
+    <nz-dropdown-menu #menu1="nzDropdownMenu">
+      <ul nz-menu>
+        <li
+          *ngFor="let option of zoomOptions"
+          nz-menu-item
+          (click)="zoom(option)"
+        >
+          <span class="scx-icon icon-zoom-{{option}}"></span>
+          {{zoomNames[option]}}
+        </li>
+      </ul>
+    </nz-dropdown-menu>
+  </div>
+
+  <div [class.tool-active]="cross.nzOpen" title="Cursor type" class="tool">
+    <nz-select
+      #cross
+      [nzShowArrow]="false"
+      [(nzOpen)]="crossOpen"
+      [nzOptionHeightPx]="24"
+      [nzCustomTemplate]="defaultTemplate"
+      nzDropdownClassName="toolbar-dropdown"
+      [(ngModel)]="iconCross"
+      nzSize="small"
+    >
+      <nz-option
+        *ngFor="let option of iconCrosses"
+        [nzValue]="option"
+        [nzLabel]="option"
+        nzCustomContent
+      >
+        <span class="scx-icon icon-{{option}}"></span>
+        {{cursorNames[option]}}
+      </nz-option>
+    </nz-select>
+    <i (click)="cross.setOpenState(true)" class="icon-arrow-down"></i>
+  </div>
+
+  <div title="Make snapshot" class="tool center">
+    <nz-button-group nzSize='small'>
+      <button nz-button nzType="link" (click)="makeSnapshot()">
+        <span class="icon-tool-camera"></span>
+      </button>
+    </nz-button-group>
+  </div>
+</div>
+
+<ng-template #defaultTemplate let-selected>
+  <span class="scx-icon icon-{{selected.nzValue}}"></span>
+</ng-template>
+<ng-template #frameIntervalTemplate>
+  <frame-selector
+    (intervalAdded)="onIntervalAdded($event)"
+    (periodAdded)="onPeriodAdded($event)"
+    [intervalOptions]="intervalOptions" [periodOptions]="periodOptions" [chart]="chart"></frame-selector>
+</ng-template>

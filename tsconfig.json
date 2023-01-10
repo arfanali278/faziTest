@@ -1,0 +1,289 @@
+{
+  "files": [],
+  "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+      "workspaces": [
+        "dist/workspaces/workspaces",
+        "dist/workspaces"
+      ],
+      "session-manager": [
+        "dist/session-manager/session-manager",
+        "dist/session-manager"
+      ],
+      "data-select": [
+        "dist/data-select/data-select",
+        "dist/data-select"
+      ],
+      "time-select": [
+        "dist/time-select/time-select",
+        "dist/time-select"
+      ],
+      "cache": [
+        "dist/cache/cache",
+        "dist/cache"
+      ],
+      "market-watch": [
+        "dist/market-watch/market-watch",
+        "dist/market-watch"
+      ],
+      "instrument-dialog": [
+        "dist/instrument-dialog/instrument-dialog",
+        "dist/instrument-dialog"
+      ],
+      "sound": [
+        "dist/sound/sound",
+        "dist/sound"
+      ],
+      "window-messanger": [
+        "dist/window-messanger/window-messanger",
+        "dist/window-messanger"
+      ],
+      "account-info": [
+        "dist/account-info/account-info",
+        "dist/account-info"
+      ],
+      "items-store": [
+        "dist/items-store/items-store",
+        "dist/items-store"
+      ]
+    }
+  },
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./e2e/tsconfig.json"
+    },
+    {
+      "path": "./tsconfig.server.json"
+    },
+    {
+      "path": "./projects/search-select/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/search-select/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/notifier/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/notifier/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/base-components/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/base-components/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/communication/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/communication/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/context-menu/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/context-menu/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/scripting/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/scripting/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/storage/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/storage/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/lazy-modules/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/lazy-modules/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/lazy-assets/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/lazy-assets/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/watchlist/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/watchlist/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/themes/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/themes/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/global-handler/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/global-handler/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/chart/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/chart/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/data-grid/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/data-grid/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/fake-communication/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/fake-communication/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/trading/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/trading/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/layout/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/layout/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/order-form/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/order-form/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/orders/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/orders/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/positions/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/positions/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/settings/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/settings/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/trading-ui/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/trading-ui/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ui/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ui/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/accounts/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/accounts/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/account-select/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/account-select/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/auth/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/auth/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/notification/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/notification/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/window-manager/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/window-manager/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/window-header/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/window-header/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/notification-list/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/notification-list/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/workspace-manager/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/workspace-manager/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/workspace/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/timezones-clock/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/session-manager/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/session-manager/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/data-select/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/data-select/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/time-select/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/time-select/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/cache/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/cache/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/templates/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/templates/tsconfig.spec.json"
+    }
+  ]
+}

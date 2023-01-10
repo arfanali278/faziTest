@@ -1,0 +1,58 @@
+<div (cdkDropListDropped)="entered($event)"
+     cdkDropList>
+  <div *ngFor="let item of items">
+    <ng-container [ngTemplateOutlet]="item.template"></ng-container>
+  </div>
+  <ng-template #delta>
+    <div
+      cdkDrag
+      cdkDragPreviewClass=""
+      [cdkDragData]="'delta'"
+      class="line-container root-line">
+      <i
+        class="icon-drag-and-drop"></i>
+      <label [formControl]="formBox.get('delta.enabled')" nz-checkbox>Delta</label>
+      <span class="colors">
+        <color-picker [field]="negativeColor"></color-picker>
+        <color-picker [field]="positiveColor"></color-picker>
+      </span>
+    </div>
+  </ng-template>
+  <ng-template #volume>
+    <div
+      cdkDrag
+      cdkDragPreviewClass=""
+      [cdkDragData]="'volume'"
+      class="line-container root-line">
+      <i
+        class="icon-drag-and-drop"></i>
+      <label [formControl]="formBox.get('volume.enabled')" nz-checkbox>Volume</label>
+    </div>
+  </ng-template>
+  <ng-template #price>
+    <div
+      cdkDrag
+      cdkDragPreviewClass=""
+      [cdkDragData]="'volume'"
+      class="line-container root-line">
+      <i
+        class="icon-drag-and-drop"></i>
+      <label [formControl]="formBox.get('price.enabled')" nz-checkbox>Price</label>
+    </div>
+  </ng-template>
+  <ng-template #priceChange>
+    <div
+      cdkDrag
+      cdkDragPreviewClass=""
+      [cdkDragData]="'priceChanded'"
+      class="line-container root-line">
+      <i
+        class="icon-drag-and-drop"></i>
+      <label [formControl]="formBox.get('priceChange.enabled')" nz-checkbox>Price Change</label>
+      <nz-select [formControl]="formBox.get('priceChange.unit')" [nzOptionHeightPx]="22">
+        <nz-option nzValue="points" nzLabel="Show in Points"></nz-option>
+        <nz-option nzValue="ticks" nzLabel="Show in Ticks"></nz-option>
+      </nz-select>
+    </div>
+  </ng-template>
+</div>
