@@ -18,6 +18,7 @@ export class InstrumentSelectComponent extends ItemsComponent<IInstrument> imple
   }
 
   @Input() set instrument(value) {
+
     if (value?.id !== this._instrument?.id) {
       this._instrument = value;
       this.value = value.id as string;
@@ -78,6 +79,7 @@ export class InstrumentSelectComponent extends ItemsComponent<IInstrument> imple
   }
 
   openDialog() {
+
     const modal = this._modalService.create({
       nzContent: InstrumentDialogComponent,
       nzWidth: 386,

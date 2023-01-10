@@ -184,7 +184,7 @@ export class MarketWatchComponent extends ItemsComponent<any> implements AfterVi
 
   isInlineOrderCreating = false;
 
-  menuItems = [{ title: 'Add Symbol', action: () => this.addSymbol() }, { divider: true }];
+  menuItems = [{ title: 'Add Symbol 3', action: () => this.addSymbol() }, { divider: true }];
 
   dataFeeds = [];
 
@@ -1099,6 +1099,7 @@ export class MarketWatchComponent extends ItemsComponent<any> implements AfterVi
   }
 
   createInstrumentModal() {
+
     return this._modalService.create({
       nzContent: InstrumentDialogComponent,
       nzWidth: 386,

@@ -15,7 +15,7 @@ export const widgetList = [
     name: 'Chart',
     component: Components.Chart,
     hasInstrument: true,
-    hasTemplates: true,
+    hasTemplates: true,   
   },
   {
     icon: 'icon-widget-positions',

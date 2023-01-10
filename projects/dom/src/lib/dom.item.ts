@@ -522,7 +522,7 @@ class SumHistogramCell extends HistogramCell {
   }
   public set status(value) {
     if (this._status != null && this._status.includes("total")) {
-      debugger;
+      ;
     }
     this._status = value;
   }*/

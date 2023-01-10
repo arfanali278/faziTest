@@ -72,9 +72,11 @@ import {
   IVolumeTemplate,
   VolumeProfileTemplatesRepository
 } from './volume-profile-custom-settings/volume-profile-templates.repository';
+import {SettingsService} from "settings";
 
 declare let StockChartX: any;
-declare let $: JQueryStatic;
+declare let $: any;
+// declare let $: JQueryStatic;
 
 const EVENTS_SUFFIX = '.scxComponent';
 
@@ -125,6 +127,10 @@ export class ChartComponent implements AfterViewInit, OnDestroy {
   currentDirection = 'window-right';
   showChartForm = true;
   enableOrderForm = false;
+
+  transformAccountLabel(item: string): string {
+    return this._settingsService.transformAccountLabel(item);
+  }
 
   get showOrderConfirm(): boolean {
     return this.settings.trading.trading.showOrderConfirm;
@@ -422,9 +428,11 @@ export class ChartComponent implements AfterViewInit, OnDestroy {
     private _templatesService: TemplatesService,
     private _tradeHandler: TradeHandler,
     private _windowManager: WindowManagerService,
+    private _settingsService: SettingsService,
     private _changeDetectorRef: ChangeDetectorRef,
     private _volumeProfileTemplatesRepository: VolumeProfileTemplatesRepository
   ) {
+
     this.setTabIcon('icon-widget-chart');
     this.setNavbarTitleGetter(this._getNavbarTitle.bind(this));
 
@@ -590,6 +598,7 @@ export class ChartComponent implements AfterViewInit, OnDestroy {
   }
 
   loadChart() {
+
     const state = this._loadedState$.value;
     const chart = this.chart = this._initChart(state);
     this.showChanges = state?.showChanges;
@@ -613,19 +622,8 @@ export class ChartComponent implements AfterViewInit, OnDestroy {
     chart.shouldDraw = this._shouldDraw;
 
     this._handleSettingsChange(this.settings);
-
-    this.instrument = state?.instrument ?? {
-      id: 'ESM2.CME',
-      description: 'E-Mini S&P 500 Jun22',
-      exchange: 'CME',
-      tickSize: 0.25,
-      precision: 2,
-      instrumentTimePeriod: 'Jun22',
-      contractSize: 50,
-      productCode: 'ES',
-      symbol: 'ESM2',
-      company: this._getInstrumentCompany(),
-    } as IStockChartXInstrument;
+    environment.instrument.company = this._getInstrumentCompany();
+    this.instrument = state?.instrument ?? environment.instrument as IStockChartXInstrument;
 
     this._orders.init();
     this._positions.init();
@@ -670,7 +668,7 @@ export class ChartComponent implements AfterViewInit, OnDestroy {
           chart.timeFrame = state.timeFrame;
         }
         if (state.stockChartXState) {
-          chart.loadState(state.stockChartXState);
+          // chart.loadState(state.stockChartXState);
         }
         /* else if (StockChartX.Indicator.registeredIndicators.VOL) {
            chart.addIndicators(new StockChartX.Indicator.registeredIndicators.VOL());
@@ -745,6 +743,7 @@ export class ChartComponent implements AfterViewInit, OnDestroy {
   }
 
   protected _initChart(state?: IScxComponentState): any {
+
     StockChartX.Environment.Path.view = './assets/StockChartX/view/';
     StockChartX.Environment.Path.locales = './assets/StockChartX/locales/';
 
@@ -766,7 +765,7 @@ export class ChartComponent implements AfterViewInit, OnDestroy {
       showInstrumentWatermark: false,
       incomePrecision: state?.instrument?.precision ?? 2,
       stayInDrawingMode: false,
-      datafeed: this.datafeed,
+      datafeed: null,
       timeFrame: (state && state.timeFrame)
         ?? { interval: 1, periodicity: StockChartXPeriodicity.HOUR },
       periodToLoad: (state && state.periodToLoad)
@@ -869,8 +868,10 @@ export class ChartComponent implements AfterViewInit, OnDestroy {
   }
 
   loadState(state?: IChartState): void {
+
     this.settings = state?.settings || clone(defaultChartSettings);
     this.link = state?.link ?? Math.random();
+
     this._loadedState$.next(state);
     if (state?.account) {
       this.account = state.account;
@@ -897,6 +898,7 @@ export class ChartComponent implements AfterViewInit, OnDestroy {
 
   loadTemplate(template: IChartTemplate): void {
     this.loadedTemplate = template;
+
     this.loadState(template.state);
   }
 

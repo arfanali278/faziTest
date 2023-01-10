@@ -1,3 +1,4 @@
+import { environment } from 'environment';
 import { ChangeDetectorRef, Component, Injector, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -25,6 +26,7 @@ import {
 } from 'trading';
 import { InstrumentFormatter } from 'data-grid';
 import { NzInputNumberComponent } from 'ng-zorro-antd/input-number/input-number.component';
+import {SettingsService} from "settings";
 
 const orderLastPriceKey = 'orderLastPrice';
 const orderLastLimitKey = 'orderLastLimitKey';
@@ -148,6 +150,7 @@ export class OrderFormComponent extends BaseOrderForm implements OnInit, OnDestr
     private _storage: Storage,
     protected _injector: Injector,
     protected _changeDetectorRef: ChangeDetectorRef,
+    protected _settingsService: SettingsService,
   ) {
     super();
     this.autoLoadData = false;
@@ -179,6 +182,10 @@ export class OrderFormComponent extends BaseOrderForm implements OnInit, OnDestr
         this.position = RealPositionsRepository.transformPosition(pos, connectionId);
       })),
     );
+  }
+
+  transformAccountLabel(item: string): string {
+    return this._settingsService.transformAccountLabel(item);
   }
 
   // handleConnect(connection: IConnection) {
@@ -237,17 +244,7 @@ export class OrderFormComponent extends BaseOrderForm implements OnInit, OnDestr
     if (state?.instrument)
       this.instrument = state.instrument;
     else
-      this.instrument = {
-        id: 'ESM2.CME',
-        description: 'E-Mini S&P 500 Jun22',
-        exchange: 'CME',
-        tickSize: 0.25,
-        precision: 2,
-        instrumentTimePeriod: 'Jun22',
-        contractSize: 50,
-        productCode: 'ES',
-        symbol: 'ESM2',
-      };
+      this.instrument = environment.instrument
 
     if (state?.account)
       this.account = state.account;

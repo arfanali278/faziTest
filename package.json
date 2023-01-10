@@ -1,10 +1,10 @@
 {
   "name": "tradrr",
-  "version": "1.0.5",
+  "version": "10.0.5",
   "description": "Tradrr",
   "author": {
-    "email": "app@tradrr.com",
-    "name": "tradrr"
+    "email": "AMSTrading",
+    "name": "tech"
   },
   "main": "main.js",
   "scripts": {
@@ -42,12 +42,14 @@
     "electron:serve-tsc": "tsc -p tsconfig.app.json",
     "electron:serve": "npm run electron:serve-tsc && npx electron . --serve",
     "electron:local": "npm run build:prod && npx electron .",
-    "electron:build": "npm run build:prod && electron-builder build"
+    "electron:build": "npm run build:prod && electron-builder build",
+    "electron:build-win": "npm run build:prod && electron-builder build --w",
+    "electron:build-mac": "npm run build:prod && electron-builder build --m"
   },
   "build": {
     "appId": "com.tradrr.app",
     "productName": "Tradrr",
-    "copyright": "Copyright © 2022 Tradrr",
+    "copyright": "Copyright © 2020 Tradrr",
     "files": [
       "dist/browser/**/*",
       "package.json",
@@ -89,7 +91,7 @@
   "private": false,
   "dependencies": {
     "@angular/animations": "10.0.8",
-    "@angular/cdk": "10.1.2",
+    "@angular/cdk": "^10.1.2",
     "@angular/common": "10.0.8",
     "@angular/compiler": "10.2.0",
     "@angular/core": "10.0.8",
@@ -105,22 +107,23 @@
     "@ngx-formly/core": "5.10.9",
     "@ngx-formly/ng-zorro-antd": "0.0.1",
     "bootstrap": "^4.5.3",
-    "canvas-datagrid": "git+https://git.avidi.tech:iTS9Ne67zubkGcpsRmFA@git.avidi.tech/angular/canvas-datagrid.git",
+    "canvas-datagrid": "git+https://tradrr-service-token:Nyk4gm2mwmB9s6vqsu4s@gitlab.com/ams-trading-group-platform/canvas-datagrid.git",
     "deepmerge": "4.2.2",
     "electron-log": "^4.2.4",
     "express": "4.17.1",
-    "hashmap": "git+https://git.avidi.tech:zdoF-WhEdwhGXbDC9HEj@git.avidi.tech/b.tsap/hash-map",
+    "hashmap": "git+https://tradrr-service-token:Nyk4gm2mwmB9s6vqsu4s@gitlab.com/ams-trading-group-platform/hash-map",
     "http-server": "0.12.3",
     "jquery": "^3.5.1",
-    "keyboard": "git+https://git.avidi.tech:iTS9Ne67zubkGcpsRmFA@git.avidi.tech/b.tsap/keyboard",
+    "keyboard": "git+https://tradrr-service-token:Nyk4gm2mwmB9s6vqsu4s@gitlab.com/ams-trading-group-platform/keyboard",
     "lodash.clonedeep": "4.5.0",
     "ng-zorro-antd": "9.3.0",
     "ngx-cookie-service": "10.1.1",
     "ngx-monaco-editor": "9.0.0",
+    "ngx-scrollbar": "^7.5.6",
     "popper.js": "^1.16.1",
     "reconnecting-websocket": "4.4.0",
     "rxjs": "6.6.2",
-    "simple-window-manager": "git+https://git.avidi.tech:iTS9Ne67zubkGcpsRmFA@git.avidi.tech/Taras/simple-window-manager.git",
+    "simple-window-manager": "git+https://tradrr-service-token:Nyk4gm2mwmB9s6vqsu4s@gitlab.com/ams-trading-group-platform/simple-window-manager.git",
     "tslib": "2.0.1",
     "underscore": "1.10.2",
     "zone.js": "0.10.3"
