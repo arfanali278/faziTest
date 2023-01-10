@@ -1,0 +1,140 @@
+image: teracy/angular-cli:latest
+
+stages:
+    - install
+    - build
+    - deploy
+
+.libs-cache:
+    tags:
+        - docker
+    cache:
+        paths:
+            - node_modules/
+
+install:
+    stage: install
+    rules:
+        - if: $CI_COMMIT_TAG == null
+    extends: .libs-cache
+    script:
+        - apt-get update
+        - apt-get install libgnutls30
+        - npm i
+
+build-web-ssr:
+    stage: build
+    tags:
+        - docker 
+    cache:
+        paths:
+            - dist/
+            - node_modules/
+    except:
+        - release
+    artifacts:
+        expire_in: 1 day
+        paths:
+            - dist/
+    script:
+        - apt-get update
+        - apt-get install libgnutls30
+        - npm install --save-dev @angular-devkit/build-angular
+        - npm run build:static
+
+build-web-release:
+    stage: build
+    tags:
+        - docker
+    cache:
+        paths:
+            - dist/
+            - node_modules/
+    only:
+        - release
+    artifacts:
+        expire_in: 1 day
+        paths:
+            - dist/
+    script:
+        - apt-get update
+        - apt-get install libgnutls30
+        - npm install --save-dev @angular-devkit/build-angular
+        - npm run build:release
+
+deploy-latest:
+    stage: deploy
+    services:
+        - docker:20.10.11-dind
+    image: docker:20.10.11-dind
+    rules:
+        - if: $CI_COMMIT_BRANCH == 'deploy-staging'
+        # - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    cache:
+        paths:
+            - dist/
+    script:
+        - CONTAINER_IMAGE="$CI_REGISTRY/$CI_PROJECT_PATH"
+        - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+        - docker build --tag $CONTAINER_IMAGE:latest .
+        - docker push $CONTAINER_IMAGE:latest
+        - docker logout
+    tags:
+        - docker
+
+
+deploy-test:
+    stage: deploy
+    services:
+        - docker:20.10.11-dind
+    image: docker:20.10.11-dind
+    rules:
+        - if: $CI_COMMIT_BRANCH == 'test-server-deployment'
+        # - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    cache:
+        paths:
+            - dist/
+    script:
+        - CONTAINER_IMAGE="$CI_REGISTRY/$CI_PROJECT_PATH"
+        - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+        - docker build --tag $CONTAINER_IMAGE:test .
+        - docker push $CONTAINER_IMAGE:test
+        - docker logout
+    tags:
+        - docker
+
+deploy-stage-from-latest:
+    stage: deploy
+    image: docker:20.10.11-dind
+    services:
+        - docker:20.10.11-dind
+    except:
+        - release 
+    script:
+        - CONTAINER_IMAGE="$CI_REGISTRY/$CI_PROJECT_PATH"
+        - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+        - docker pull $CONTAINER_IMAGE:latest
+        - docker tag $CONTAINER_IMAGE:latest $CONTAINER_IMAGE:stage
+        - docker push $CONTAINER_IMAGE:stage
+        - docker logout
+    tags:
+        - docker
+
+deploy-release:
+    stage: deploy
+    services:
+        - docker:20.10.11-dind
+    image: docker:20.10.11-dind
+    only:
+        - release
+    cache:
+        paths:
+            - dist/
+    script:
+        - CONTAINER_IMAGE="$CI_REGISTRY/$CI_PROJECT_PATH"
+        - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+        - docker build --tag $CONTAINER_IMAGE:release .
+        - docker push $CONTAINER_IMAGE:release
+        - docker logout
+    tags:
+        - docker

@@ -113,6 +113,7 @@ export class InstrumentDialogComponent extends ItemsComponent<IInstrument> imple
   }
 
   selectInstrument(item: any) {
+
     if (item.tickSize === 0 && item.precision === 0) {
       this._repository.getItemById(item.id, { accountId: this.accountId, connectionId: this.connectionId })
         .pipe(untilDestroyed(this))

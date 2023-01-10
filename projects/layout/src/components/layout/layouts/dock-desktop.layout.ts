@@ -54,7 +54,6 @@ export class DockDesktopLayout extends Layout {
     let componentState: any;
     let componentTemplate: IBaseTemplate;
     let config: any;
-
     if (typeof componentNameOrConfig === 'string') {
       componentName = componentNameOrConfig;
       config = {};
@@ -112,7 +111,9 @@ export class DockDesktopLayout extends Layout {
 
       switch (componentName) {
         case Components.Dom:
-          configData = {...configData, width: 650, height: 950};
+          if (!configData?.id) {
+            configData = {...configData, width: 650, height: 950};
+          }
           break;
         default:
           break;
